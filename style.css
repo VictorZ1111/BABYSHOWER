@@ -1188,3 +1188,33 @@ body {
     .arco-inferior .letra:nth-child(14) { left: calc(50% + 132px); transform: translateX(-50%) translateY(-12px) rotate(-25deg); }
     .arco-inferior .letra:nth-child(15) { left: calc(50% + 155px); transform: translateX(-50%) translateY(-16px) rotate(-32deg); }
 }
+
+/* ====================================
+   PROGRESS STEPS (Pasos de progreso)
+   ==================================== */
+.progress-steps {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.progress-steps .step {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #666;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.progress-steps .step.active {
+    background: rgba(255, 182, 193, 0.3);
+    color: #333;
+    font-weight: 500;
+}
+
+.progress-steps .step.completed {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    font-weight: 500;
+}

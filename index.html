@@ -9,73 +9,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="title">
+    <div class="contenedor">
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <h1 class="titulo">
                 <i class="fas fa-baby"></i>
-                !Bienvenida Daella Aitana¡
+                !Bienvenida Aitana¡
                 <i class="fas fa-heart"></i>
             </h1>
-            <p class="subtitle">¡Comparte los momentos especiales de este día!</p>
+            <p class="subtitulo">¡Comparte los momentos especiales de este día!</p>
         </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                <div class="welcome-card">
-                    <i class="fas fa-camera camera-icon"></i>
+        <!-- Contenido Principal -->
+        <main class="contenido-principal">
+            <!-- Sección de Bienvenida -->
+            <div class="seccion-bienvenida">
+                <div class="tarjeta-bienvenida">
+                    <i class="fas fa-camera icono-camara"></i>
                     <h2>¡Captura un momento especial!</h2>
                     <p>Toma una foto del evento y comparte momentos inolvidables ¡tu foto aparecerá en nuestro perfil de Instagram!</p>
                 </div>
             </div>
 
-            <!-- Photo Capture Section -->
-            <div class="photo-section">
+            <!-- Sección de Captura de Fotos -->
+            <div class="seccion-fotos">
                 <!-- Botón principal (se oculta cuando hay fotos) -->
-                <div class="main-upload-section">
-                    <button id="mainUploadBtn" class="main-upload-btn">
+                <div class="seccion-subir-principal">
+                    <button id="botonSubirPrincipal" class="boton-subir-principal">
                         <i class="fas fa-cloud-upload-alt"></i>
                         Subir Fotos
                     </button>
                 </div>
 
                 <!-- Menú de selección (oculto inicialmente) -->
-                <div id="uploadMenu" class="upload-menu" style="display: none;">
-                    <div class="upload-options">
-                        <button id="cameraOption" class="upload-option camera-option">
+                <div id="menuSubir" class="menu-subir" style="display: none;">
+                    <div class="opciones-subir">
+                        <button id="opcionCamara" class="opcion-subir opcion-camara">
                             <i class="fas fa-camera"></i>
                             <span>Tomar Foto</span>
                         </button>
-                        <button id="galleryOption" class="upload-option gallery-option">
+                        <button id="opcionGaleria" class="opcion-subir opcion-galeria">
                             <i class="fas fa-images"></i>
                             <span>Galería</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Photo Preview (hidden by default) -->
-                <div class="photo-preview" style="display: none;">
-                    <div class="preview-container">
-                        <h3 class="gallery-title">
+                <!-- Vista Previa de Fotos (oculto por defecto) -->
+                <div class="vista-previa-fotos" style="display: none;">
+                    <div class="contenedor-vista-previa">
+                        <h3 class="titulo-galeria">
                             <i class="fas fa-images"></i>
                             Fotos seleccionadas
-                            <span class="photo-counter">0</span>
+                            <span class="contador-fotos">0</span>
                         </h3>
-                        <div class="photos-gallery">
+                        <div class="galeria-fotos">
                             <!-- Las fotos aparecerán aquí -->
                         </div>
-                        <div class="preview-actions">
-                            <button class="action-btn take-another-btn">
+                        <div class="acciones-vista-previa">
+                            <button class="boton-accion tomar-otra-foto">
                                 <i class="fas fa-camera"></i>
                                 Tomar foto
                             </button>
-                            <button class="action-btn upload-gallery-btn">
+                            <button class="boton-accion subir-galeria">
                                 <i class="fas fa-images"></i>
                                 Galería
                             </button>
-                            <button class="action-btn publish-btn">
+                            <button class="boton-accion publicar">
                                 <i class="fas fa-share"></i>
                                 Publicar fotos
                             </button>
@@ -83,36 +83,41 @@
                     </div>
                 </div>
 
-                <!-- Loading Section (hidden by default) -->
-                <div class="loading-section" style="display: none;">
-                    <div class="loading-spinner"></div>
-                    <p>Publicando tu foto...</p>
+                <!-- Sección de Carga (oculto por defecto) -->
+                <div class="seccion-carga" style="display: none;">
+                    <div class="spinner-carga"></div>
+                    <p id="loading-text">Preparando fotos para Instagram...</p>
+                    <div class="progress-steps">
+                        <div class="step" id="step-upload">📤 Subiendo imagen...</div>
+                        <div class="step" id="step-instagram">📸 Publicando en Instagram...</div>
+                        <div class="step" id="step-complete">✅ ¡Completado!</div>
+                    </div>
                 </div>
 
-                <!-- Success Section (hidden by default) -->
-                <div class="success-section" style="display: none;">
-                    <div class="success-card">
+                <!-- Sección de Éxito (oculto por defecto) -->
+                <div class="seccion-exito" style="display: none;">
+                    <div class="tarjeta-exito">
                         <i class="fas fa-check-circle"></i>
-                        <h3>¡Foto guardada con éxito!</h3>
-                        <p>Tu foto se ha descargado automáticamente. Puedes subirla manualmente a Instagram desde tu galería.</p>
-                        <a href="https://instagram.com/baby_shower_daella" target="_blank" class="instagram-btn">
+                        <h3>¡Fotos publicadas en Instagram!</h3>
+                        <p>Tus fotos han sido publicadas automáticamente en nuestro perfil de Instagram. ¡Gracias por compartir este momento especial!</p>
+                        <a href="https://instagram.com/baby_shower_daella" target="_blank" class="boton-instagram">
                             <i class="fab fa-instagram"></i>
-                            Ir a Instagram
+                            Ver en Instagram
                         </a>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="instagram-link">
-                <a href="https://instagram.com/baby_shower_daella" target="_blank" class="footer-instagram-btn">
+        <!-- Pie de Página -->
+        <footer class="pie-pagina">
+            <div class="enlace-instagram">
+                <a href="https://instagram.com/baby_shower_daella" target="_blank" class="boton-instagram-pie">
                     <i class="fab fa-instagram"></i>
                     ¡Visita nuestro perfil!
                 </a>
             </div>
-            <p class="footer-text">
+            <p class="texto-pie">
                 <i class="fas fa-heart"></i>
                 Gracias por acompañarnos en este día especial
                 <i class="fas fa-heart"></i>
@@ -121,30 +126,30 @@
     </div>
 
     <!-- Modal de Bienvenida -->
-    <div id="welcomeModal" class="welcome-modal">
-        <div class="welcome-modal-content">
-            <div class="welcome-modal-header">
+    <div id="modalBienvenida" class="modal-bienvenida">
+        <div class="contenido-modal-bienvenida">
+            <div class="encabezado-modal-bienvenida">
                 <i class="fas fa-heart"></i>
                 <h2>¡Bienvenidos a mi baby shower!</h2>
                 <i class="fas fa-baby"></i>
             </div>
-            <div class="welcome-modal-body">
+            <div class="cuerpo-modal-bienvenida">
                 <p>¡Captura momentos especiales de este día toma múltiples fotos y compartelas con todos!</p>
-                <div class="welcome-features">
-                    <div class="feature">
+                <div class="caracteristicas-bienvenida">
+                    <div class="caracteristica">
                         <i class="fas fa-camera"></i>
                         <span>Toma fotos con tu cámara</span>
                     </div>
-                    <div class="feature">
+                    <div class="caracteristica">
                         <i class="fas fa-images"></i>
                         <span>Sube desde tu galería</span>
                     </div>
-                    <div class="feature">
+                    <div class="caracteristica">
                         <i class="fas fa-heart"></i>
                         <span>Comparte momentos especiales</span>
                     </div>
                 </div>
-                <button id="celebrateBtn" class="celebrate-btn">
+                <button id="botonCelebrar" class="boton-celebrar">
                     ¡A FESTEJAR!
                 </button>
             </div>
@@ -152,44 +157,37 @@
     </div>
 
     <!-- Animación de Bienvenida Especial -->
-    <div id="welcomeAnimation" class="welcome-animation">
-        <div class="arc-container">
+    <div id="animacionBienvenida" class="animacion-bienvenida">
+        <div class="contenedor-arco">
             <!-- Primera línea: ¡BIENVENIDA! -->
-            <div class="arc-line arc-top">
-                <span class="letter">¡</span>
-                <span class="letter">B</span>
-                <span class="letter">I</span>
-                <span class="letter">E</span>
-                <span class="letter">N</span>
-                <span class="letter">V</span>
-                <span class="letter">E</span>
-                <span class="letter">N</span>
-                <span class="letter">I</span>
-                <span class="letter">D</span>
-                <span class="letter">A</span>
-                <span class="letter">!</span>
+            <div class="linea-arco arco-superior">
+                <span class="letra">¡</span>
+                <span class="letra">B</span>
+                <span class="letra">I</span>
+                <span class="letra">E</span>
+                <span class="letra">N</span>
+                <span class="letra">V</span>
+                <span class="letra">E</span>
+                <span class="letra">N</span>
+                <span class="letra">I</span>
+                <span class="letra">D</span>
+                <span class="letra">A</span>
+                <span class="letra">!</span>
             </div>
             
-            <!-- Segunda línea: ¡DAELLA AITANA! -->
-            <div class="arc-line arc-bottom">
-                <span class="letter">¡</span>
-                <span class="letter">D</span>
-                <span class="letter">A</span>
-                <span class="letter">E</span>
-                <span class="letter">L</span>
-                <span class="letter">L</span>
-                <span class="letter">A</span>
-                <span class="space"> </span>
-                <span class="letter">A</span>
-                <span class="letter">I</span>
-                <span class="letter">T</span>
-                <span class="letter">A</span>
-                <span class="letter">N</span>
-                <span class="letter">A</span>
-                <span class="letter">!</span>
+            <!-- Segunda línea: ¡AITANA! -->
+            <div class="linea-arco arco-inferior">
+                <span class="letra">¡</span>
+                <span class="letra">A</span>
+                <span class="letra">I</span>
+                <span class="letra">T</span>
+                <span class="letra">A</span>
+                <span class="letra">N</span>
+                <span class="letra">A</span>
+                <span class="letra">!</span>
             </div>
         </div>
-        <div class="baby-icons">
+        <div class="iconos-bebe">
             <i class="fas fa-baby"></i>
             <i class="fas fa-heart"></i>
             <i class="fas fa-star"></i>

@@ -2,19 +2,34 @@
 let selectedImages = [];
 let lastUsedInput = 'camera'; // 'camera' o 'gallery'
 
+// Configuración de Instagram API
+const INSTAGRAM_CONFIG = {
+    ACCESS_TOKEN: 'IGAA8JIWr2fiFBZAFREZAjZAVbkZAob3BkX0FudmFSd3JjNXVOeXVNU3F4Vi15eEs2Smk5eFVzNXZAlM0hVa0F4ZAFV5YXhpUk1xTlktNWpYX1FTVFhsOWpUSkNpSlY2ZAG16OWpwVXFWT1hxZAnJWNkFyZAlVQNWJENmlHU2xJbUVxRGIxbwZDZD',
+    INSTAGRAM_ACCOUNT_ID: '17841477304154562',
+    API_VERSION: 'v18.0'
+};
+
+// Configuración de Cloudinary
+const CLOUDINARY_CONFIG = {
+    CLOUD_NAME: 'dv8rj8slt',
+    API_KEY: '321574754928822',
+    API_SECRET: '_7NIMpKMNUiBmx-YRQnJEGMJlPo',
+    UPLOAD_PRESET: 'baby_shower_preset' // Lo crearemos
+};
+
 // Elementos del DOM
-const mainUploadBtn = document.getElementById('mainUploadBtn');
-const uploadMenu = document.getElementById('uploadMenu');
-const cameraOption = document.getElementById('cameraOption');
-const galleryOption = document.getElementById('galleryOption');
-const photoPreview = document.querySelector('.photo-preview');
-const photosGallery = document.querySelector('.photos-gallery');
-const photoCounter = document.querySelector('.photo-counter');
-const takeAnotherBtn = document.querySelector('.take-another-btn');
-const uploadGalleryBtn = document.querySelector('.upload-gallery-btn');
-const publishBtn = document.querySelector('.publish-btn');
-const welcomeModal = document.getElementById('welcomeModal');
-const mainUploadSection = document.querySelector('.main-upload-section');
+const botonSubirPrincipal = document.getElementById('botonSubirPrincipal');
+const menuSubir = document.getElementById('menuSubir');
+const opcionCamara = document.getElementById('opcionCamara');
+const opcionGaleria = document.getElementById('opcionGaleria');
+const photoPreview = document.querySelector('.vista-previa-fotos');
+const photosGallery = document.querySelector('.galeria-fotos');
+const photoCounter = document.querySelector('.contador-fotos');
+const takeAnotherBtn = document.querySelector('.tomar-otra-foto');
+const uploadGalleryBtn = document.querySelector('.subir-galeria');
+const publishBtn = document.querySelector('.publicar');
+const modalBienvenida = document.getElementById('modalBienvenida');
+const mainUploadSection = document.querySelector('.seccion-subir-principal');
 
 // Crear inputs de archivo (invisibles)
 const cameraInput = document.createElement('input');
@@ -35,28 +50,28 @@ document.body.appendChild(galleryInput);
 // Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
     // Mostrar animación de bienvenida primero después de 300ms
-    setTimeout(showWelcomeAnimation, 300);
+    setTimeout(showanimacionBienvenida, 300);
     
     // Mostrar modal de bienvenida después de la animación (8 segundos)
-    setTimeout(showWelcomeModal, 8000);
+    setTimeout(showmodalBienvenida, 8000);
     
     // Botón principal de subir fotos
-    mainUploadBtn.addEventListener('click', function() {
-        uploadMenu.style.display = uploadMenu.style.display === 'none' ? 'block' : 'none';
+    botonSubirPrincipal.addEventListener('click', function() {
+        menuSubir.style.display = menuSubir.style.display === 'none' ? 'block' : 'none';
     });
     
     // Opción de cámara
-    cameraOption.addEventListener('click', function() {
+    opcionCamara.addEventListener('click', function() {
         lastUsedInput = 'camera';
         cameraInput.click();
-        uploadMenu.style.display = 'none';
+        menuSubir.style.display = 'none';
     });
 
     // Opción de galería
-    galleryOption.addEventListener('click', function() {
+    opcionGaleria.addEventListener('click', function() {
         lastUsedInput = 'gallery';
         galleryInput.click();
-        uploadMenu.style.display = 'none';
+        menuSubir.style.display = 'none';
     });
 
     // Botón "tomar otra foto" en preview
@@ -72,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Botón de celebrar en modal de bienvenida
-    const celebrateBtn = document.getElementById('celebrateBtn');
-    if (celebrateBtn) {
-        celebrateBtn.addEventListener('click', function() {
-            hideWelcomeModal();
+    const botonCelebrar = document.getElementById('botonCelebrar');
+    if (botonCelebrar) {
+        botonCelebrar.addEventListener('click', function() {
+            hidemodalBienvenida();
         });
     }
 
@@ -94,50 +109,48 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Botón de publicar (por ahora solo muestra mensaje)
+    // Botón de publicar - Publicar en Instagram
     publishBtn.addEventListener('click', function() {
         if (selectedImages.length > 0) {
-            showAlert(`¡${selectedImages.length} foto${selectedImages.length > 1 ? 's' : ''} guardada${selectedImages.length > 1 ? 's' : ''}! La funcionalidad de Instagram se agregará pronto.`, 'success');
+            publishToInstagram();
         } else {
             showAlert('No hay fotos seleccionadas para publicar.', 'error');
         }
     });
 
     // Cerrar modal al hacer clic fuera de él
-    welcomeModal.addEventListener('click', function(e) {
-        if (e.target === welcomeModal) {
-            hideWelcomeModal();
+    modalBienvenida.addEventListener('click', function(e) {
+        if (e.target === modalBienvenida) {
+            hidemodalBienvenida();
         }
     });
 });
 
 // Función para mostrar modal de bienvenida
-function showWelcomeModal() {
-    if (isMobileDevice()) {
-        welcomeModal.classList.add('show');
-    }
+function showmodalBienvenida() {
+    modalBienvenida.classList.add('show');
 }
 
 // Función para ocultar modal de bienvenida
-function hideWelcomeModal() {
-    welcomeModal.classList.remove('show');
+function hidemodalBienvenida() {
+    modalBienvenida.classList.remove('show');
 }
 
 // Función para mostrar animación de bienvenida especial
-function showWelcomeAnimation() {
-    const welcomeAnimation = document.getElementById('welcomeAnimation');
-    welcomeAnimation.classList.add('show');
+function showanimacionBienvenida() {
+    const animacionBienvenida = document.getElementById('animacionBienvenida');
+    animacionBienvenida.classList.add('show');
     
     // Ocultar automáticamente después de 7 segundos
     setTimeout(() => {
-        hideWelcomeAnimation();
+        hideanimacionBienvenida();
     }, 7000);
 }
 
 // Función para ocultar animación de bienvenida
-function hideWelcomeAnimation() {
-    const welcomeAnimation = document.getElementById('welcomeAnimation');
-    welcomeAnimation.classList.remove('show');
+function hideanimacionBienvenida() {
+    const animacionBienvenida = document.getElementById('animacionBienvenida');
+    animacionBienvenida.classList.remove('show');
 }
 
 // Función para manejar la selección de múltiples imágenes
@@ -393,4 +406,256 @@ window.addEventListener('orientationchange', function() {
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 500);
+});
+
+// ========================================
+// FUNCIONES DE INSTAGRAM API
+// ========================================
+
+// Función principal para publicar en Instagram
+async function publishToInstagram() {
+    if (selectedImages.length === 0) {
+        showAlert('No hay fotos para publicar.', 'error');
+        return;
+    }
+
+    // Mostrar sección de carga
+    showLoadingSection();
+
+    try {
+        // Publicar cada imagen
+        for (let i = 0; i < selectedImages.length; i++) {
+            const image = selectedImages[i];
+            await publishSingleImage(image, i + 1);
+        }
+
+        // Mostrar éxito
+        showSuccessSection();
+        showAlert(`¡${selectedImages.length} foto${selectedImages.length > 1 ? 's' : ''} publicada${selectedImages.length > 1 ? 's' : ''} en Instagram!`, 'success');
+        
+        // Limpiar fotos seleccionadas después de un momento
+        setTimeout(() => {
+            clearSelectedImages();
+        }, 3000);
+
+    } catch (error) {
+        console.error('Error al publicar en Instagram:', error);
+        hideLoadingSection();
+        showAlert('Error al publicar en Instagram. Inténtalo de nuevo.', 'error');
+    }
+}
+
+// Función para publicar una imagen individual
+async function publishSingleImage(imageData, imageNumber) {
+    try {
+        // Paso 1: Subir la imagen a un servicio temporal (simulado)
+        const imageUrl = await uploadImageToTemporaryService(imageData);
+        
+        // Paso 2: Crear el contenedor de media en Instagram
+        const mediaId = await createInstagramMedia(imageUrl);
+        
+        // Paso 3: Publicar el contenido
+        await publishInstagramMedia(mediaId);
+        
+        console.log(`Imagen ${imageNumber} publicada exitosamente`);
+        
+    } catch (error) {
+        console.error(`Error al publicar imagen ${imageNumber}:`, error);
+        throw error;
+    }
+}
+
+// Función para subir imagen a Cloudinary
+async function uploadImageToTemporaryService(imageData) {
+    try {
+        // Convertir blob a archivo
+        const file = await convertBlobToFile(imageData.url, `baby_shower_${Date.now()}.jpg`);
+        
+        // Subir a Cloudinary
+        const cloudinaryUrl = await uploadToCloudinary(file);
+        
+        console.log('Imagen subida a Cloudinary:', cloudinaryUrl);
+        return cloudinaryUrl;
+        
+    } catch (error) {
+        console.error('Error subiendo imagen a Cloudinary:', error);
+        throw new Error('Error al procesar la imagen para Instagram');
+    }
+}
+
+// Función auxiliar para convertir blob a archivo
+async function convertBlobToFile(blobUrl, fileName) {
+    const response = await fetch(blobUrl);
+    const blob = await response.blob();
+    return new File([blob], fileName, { type: blob.type });
+}
+
+// Función para subir imagen a Cloudinary
+async function uploadToCloudinary(file) {
+    try {
+        // Crear FormData para Cloudinary
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'baby_shower_unsigned'); // Preset sin firma
+        formData.append('folder', 'baby_shower_photos');
+        
+        // Subir a Cloudinary (usando upload sin autenticación)
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Error de Cloudinary: ${errorData.error?.message || response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        // Retornar la URL segura de la imagen
+        return data.secure_url;
+        
+    } catch (error) {
+        console.error('Error subiendo a Cloudinary:', error);
+        throw new Error('Error al subir imagen a Cloudinary');
+    }
+}
+
+// Función para generar firma de Cloudinary (si necesitas upload firmado)
+function generateCloudinarySignature(params, apiSecret) {
+    // Ordenar parámetros
+    const sortedParams = Object.keys(params)
+        .sort()
+        .map(key => `${key}=${params[key]}`)
+        .join('&');
+    
+    // Agregar API secret
+    const stringToSign = sortedParams + apiSecret;
+    
+    // Generar hash SHA1 (necesitarías una librería como crypto-js)
+    // Por simplicidad, usaremos upload sin firma
+    return null;
+}
+
+// Función para crear media container en Instagram
+async function createInstagramMedia(imageUrl) {
+    const url = `https://graph.facebook.com/${INSTAGRAM_CONFIG.API_VERSION}/${INSTAGRAM_CONFIG.INSTAGRAM_ACCOUNT_ID}/media`;
+    
+    const formData = new FormData();
+    formData.append('image_url', imageUrl);
+    formData.append('caption', '¡Momento especial del Baby Shower! 💕👶 #BabyShowerAitana #MomentosEspeciales');
+    formData.append('access_token', INSTAGRAM_CONFIG.ACCESS_TOKEN);
+    
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+    
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error creating media: ${errorData.error?.message || response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data.id;
+}
+
+// Función para publicar el media container
+async function publishInstagramMedia(mediaId) {
+    const url = `https://graph.facebook.com/${INSTAGRAM_CONFIG.API_VERSION}/${INSTAGRAM_CONFIG.INSTAGRAM_ACCOUNT_ID}/media_publish`;
+    
+    const formData = new FormData();
+    formData.append('creation_id', mediaId);
+    formData.append('access_token', INSTAGRAM_CONFIG.ACCESS_TOKEN);
+    
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+    
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error publishing media: ${errorData.error?.message || response.statusText}`);
+    }
+    
+    return await response.json();
+}
+
+// Función para mostrar sección de carga
+function showLoadingSection() {
+    const loadingSection = document.querySelector('.seccion-carga');
+    const photoPreview = document.querySelector('.vista-previa-fotos');
+    
+    photoPreview.style.display = 'none';
+    loadingSection.style.display = 'block';
+    
+    // Scroll hacia la sección de carga
+    loadingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Función para ocultar sección de carga
+function hideLoadingSection() {
+    const loadingSection = document.querySelector('.seccion-carga');
+    const photoPreview = document.querySelector('.vista-previa-fotos');
+    
+    loadingSection.style.display = 'none';
+    photoPreview.style.display = 'block';
+}
+
+// Función para mostrar sección de éxito
+function showSuccessSection() {
+    const loadingSection = document.querySelector('.seccion-carga');
+    const successSection = document.querySelector('.seccion-exito');
+    
+    loadingSection.style.display = 'none';
+    successSection.style.display = 'block';
+    
+    // Scroll hacia la sección de éxito
+    successSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Función para limpiar imágenes seleccionadas
+function clearSelectedImages() {
+    // Limpiar URLs de memoria
+    selectedImages.forEach(img => {
+        URL.revokeObjectURL(img.url);
+    });
+    
+    // Resetear array
+    selectedImages = [];
+    
+    // Actualizar interfaz
+    updateGalleryDisplay();
+    updateInterfaceState();
+    
+    // Ocultar sección de éxito y mostrar botón principal
+    document.querySelector('.seccion-exito').style.display = 'none';
+    document.querySelector('.seccion-subir-principal').style.display = 'block';
+}
+
+// Función para verificar el estado del token de Instagram
+async function verifyInstagramToken() {
+    try {
+        const url = `https://graph.facebook.com/${INSTAGRAM_CONFIG.API_VERSION}/me?access_token=${INSTAGRAM_CONFIG.ACCESS_TOKEN}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error('Token inválido o expirado');
+        }
+        
+        const data = await response.json();
+        console.log('Token de Instagram verificado:', data.name);
+        return true;
+        
+    } catch (error) {
+        console.error('Error verificando token de Instagram:', error);
+        showAlert('Error de configuración de Instagram. Contacta al administrador.', 'error');
+        return false;
+    }
+}
+
+// Verificar token al cargar la página
+window.addEventListener('load', function() {
+    // Verificar token de Instagram
+    verifyInstagramToken();
 });

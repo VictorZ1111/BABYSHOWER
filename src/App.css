@@ -498,9 +498,13 @@ body {
     padding: 10px;
 }
 
-/* Responsive para Desktop - Mantener centrado dinámico */
+/* Responsive para Desktop - MANTENER CENTRADO DINÁMICO SIEMPRE */
 @media (min-width: 768px) {
     .galeria-fotos {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
         gap: 20px;
         min-height: 150px;
         padding: 15px;
@@ -514,6 +518,10 @@ body {
 
 @media (min-width: 1024px) {
     .galeria-fotos {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
         gap: 25px;
         min-height: 180px;
         padding: 20px;

@@ -10,9 +10,9 @@ import { useState, useCallback } from 'react';
 // Configuración de Instagram Graph API
 const INSTAGRAM_CONFIG = {
   // Token de acceso de página (Page Access Token) - válido por 60 días
-  ACCESS_TOKEN: 'EAATTNtjJ3OcBPjsQ0LZCWXQLIh7RlivJ8WE3e3LlldVD769ET2YOtMwIBdsJhCha51JKqVf3ic2CDjZAUnFhdtpQvacLS7qwRg0BHyMa0kgoJzExNcB6ZAuOqvYfzjpSCSeWXBZBjfABgwWBzWTWrDdwccKFg5ZCghoKG2EJZBwdHixJ3ZAl8X1iXxBZCiCOpx5QfJHW30z0ZCUBUfXaAUN2L',
+  ACCESS_TOKEN: import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN || 'EAATTNtjJ3OcBPjsQ0LZCWXQLIh7RlivJ8WE3e3LlldVD769ET2YOtMwIBdsJhCha51JKqVf3ic2CDjZAUnFhdtpQvacLS7qwRg0BHyMa0kgoJzExNcB6ZAuOqvYfzjpSCSeWXBZBjfABgwWBzWTWrDdwccKFg5ZCghoKG2EJZBwdHixJ3ZAl8X1iXxBZCiCOpx5QfJHW30z0ZCUBUfXaAUN2L',
   // ID de la cuenta comercial de Instagram (@baby_shower_daella)
-  INSTAGRAM_ACCOUNT_ID: '17841477304184562',
+  INSTAGRAM_ACCOUNT_ID: import.meta.env.VITE_INSTAGRAM_ACCOUNT_ID || '17841477304184562',
   // Versión de la API de Graph de Facebook/Instagram
   API_VERSION: 'v18.0'
 };
@@ -20,13 +20,13 @@ const INSTAGRAM_CONFIG = {
 // Configuración de Cloudinary (servicio de almacenamiento temporal de imágenes)
 const CLOUDINARY_CONFIG = {
   // Nombre del cloud de Cloudinary
-  CLOUD_NAME: 'dv8rj8slt',
+  CLOUD_NAME: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dv8rj8slt',
   // API Key pública de Cloudinary
   API_KEY: '321574754928822',
   // API Secret de Cloudinary (para uploads firmados)
   API_SECRET: '_7NIMpKMNUiBmx-YRQnJEGMJlPo',
   // Preset de upload no firmado (permite subir sin autenticación backend)
-  UPLOAD_PRESET: 'baby_shower_unsigned'
+  UPLOAD_PRESET: import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'baby_shower_unsigned'
 };
 
 // ========================================

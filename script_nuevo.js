@@ -1,5 +1,3 @@
-console.log('🚀 SCRIPT INICIANDO...');
-
 // Variables globales
 let selectedImages = [];
 let lastUsedInput = 'camera';
@@ -10,8 +8,6 @@ let botonSubirPrincipal, menuSubir, opcionCamara, opcionGaleria;
 let photoPreview, photosGallery, photoCounter;
 let takeAnotherBtn, uploadGalleryBtn, publishBtn;
 let modalBienvenida, mainUploadSection;
-
-console.log('✅ VARIABLES DECLARADAS');
 
 // Configuración de Instagram API
 const INSTAGRAM_CONFIG = {
@@ -28,12 +24,10 @@ const CLOUDINARY_CONFIG = {
     UPLOAD_PRESET: 'baby_shower_unsigned'
 };
 
-console.log('🔧 CONFIGURACIÓN CARGADA');
+
 
 // Event Listeners - TODO SE EJECUTA CUANDO EL DOM ESTÉ LISTO
 document.addEventListener('DOMContentLoaded', function() {
-    alert('🎯 DOM CARGADO! Inicializando...');
-    
     // Inicializar elementos del DOM
     botonSubirPrincipal = document.getElementById('botonSubirPrincipal');
     menuSubir = document.getElementById('menuSubir');
@@ -47,8 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     publishBtn = document.querySelector('.publicar');
     modalBienvenida = document.getElementById('modalBienvenida');
     mainUploadSection = document.querySelector('.seccion-subir-principal');
-    
-    alert('📱 ELEMENTOS ENCONTRADOS! PublishBtn: ' + (publishBtn ? 'SÍ' : 'NO'));
     
     // Crear inputs de archivo
     cameraInput = document.createElement('input');
@@ -66,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
     galleryInput.multiple = true;
     document.body.appendChild(galleryInput);
     
-    alert('📂 INPUTS CREADOS');
-    
     // Configurar event listeners
     setupEventListeners();
     
@@ -78,8 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función para configurar todos los event listeners
 function setupEventListeners() {
-    alert('🔗 CONFIGURANDO EVENT LISTENERS...');
-    
     // Botón principal de subir fotos
     if (botonSubirPrincipal) {
         botonSubirPrincipal.addEventListener('click', function() {
@@ -128,23 +116,15 @@ function setupEventListeners() {
         });
     }
     
-    // BOTÓN DE PUBLICAR - EL MÁS IMPORTANTE
+    // BOTÓN DE PUBLICAR
     if (publishBtn) {
-        alert('✅ CONFIGURANDO BOTÓN PUBLICAR...');
-        
         publishBtn.addEventListener('click', function() {
-            console.log('🔥 Botón publicar clickeado. Fotos:', selectedImages.length);
-            
             if (selectedImages.length > 0) {
                 publishToInstagram();
             } else {
                 showAlert('No hay fotos seleccionadas para publicar.', 'error');
             }
         });
-        
-        alert('✅ BOTÓN PUBLICAR CONFIGURADO');
-    } else {
-        alert('❌ ERROR: No se encontró el botón publicar');
     }
     
     // Modal de bienvenida
@@ -155,8 +135,6 @@ function setupEventListeners() {
             }
         });
     }
-    
-    alert('✅ TODOS LOS EVENT LISTENERS CONFIGURADOS');
 }
 
 // Función principal para publicar en Instagram
@@ -461,8 +439,6 @@ function handleFileSelection(event) {
     
     if (files.length === 0) return;
     
-    alert('📸 Archivos seleccionados: ' + files.length);
-    
     files.forEach((file, index) => {
         if (file.type.startsWith('image/')) {
             const imageId = Date.now() + index;
@@ -624,4 +600,3 @@ document.addEventListener('click', function(e) {
     }
 });
 
-console.log('📝 SCRIPT CARGADO COMPLETAMENTE');

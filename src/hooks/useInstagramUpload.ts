@@ -7,6 +7,13 @@ import { useState, useCallback } from 'react';
 // CONFIGURACIÓN DE APIs EXTERNAS
 // ========================================
 
+// Debug: Verificar variables de entorno con ALERT
+alert(`🔧 DEBUG - Variables de entorno:
+ACCESS_TOKEN: ${import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN ? '✅ Encontrado' : '❌ No encontrado'}
+ACCOUNT_ID: ${import.meta.env.VITE_INSTAGRAM_ACCOUNT_ID ? '✅ Encontrado' : '❌ No encontrado'}  
+CLOUD_NAME: ${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ? '✅ Encontrado' : '❌ No encontrado'}
+UPLOAD_PRESET: ${import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET ? '✅ Encontrado' : '❌ No encontrado'}`);
+
 // Configuración de Instagram Graph API
 const INSTAGRAM_CONFIG = {
   // Token de acceso de página (Page Access Token) - válido por 60 días

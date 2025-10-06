@@ -1,71 +1,8 @@
-/**
- * ========================================================================================
- * CONFIGURACIÓN VITE: Baby Shower App - Build Tool y Development Server
- * ========================================================================================
- * 
- * Este archivo configura Vite como bundler y development server para la aplicación
- * React de baby shower. Incluye optimizaciones específicas como React Compiler
- * y configuraciones para desarrollo y producción.
- */
-
-/**
- * IMPORTACIONES DE CONFIGURACIÓN
- * =============================
- */
-
-// Función para definir configuración de Vite con TypeScript support
 import { defineConfig } from 'vite'
-
-// Plugin oficial de React para Vite con soporte JSX y Fast Refresh
 import react from '@vitejs/plugin-react'
 
-/**
- * CONFIGURACIÓN PRINCIPAL DE VITE
- * ==============================
- * 
- * Configuración optimizada para desarrollo React moderno con TypeScript,
- * incluyendo el nuevo React Compiler experimental para optimizaciones automáticas.
- * 
- * Referencia oficial: https://vite.dev/config/
- */
 export default defineConfig({
-  /**
-   * PLUGINS DE VITE
-   * ==============
-   * 
-   * Array de plugins que extienden la funcionalidad base de Vite
-   * para manejar React, optimizaciones y transformaciones específicas.
-   */
-  plugins: [
-    /**
-     * PLUGIN REACT CON CONFIGURACIONES AVANZADAS
-     * =========================================
-     * 
-     * Plugin oficial de React que habilita JSX, Fast Refresh (HMR)
-     * y optimizaciones específicas para desarrollo React.
-     */
-    react({
-      /**
-       * CONFIGURACIÓN BABEL
-       * ==================
-       * 
-       * Configuración personalizada de Babel para transformaciones
-       * de JavaScript/JSX y optimizaciones experimentales.
-       */
-      babel: {
-        /**
-         * PLUGINS BABEL ESPECÍFICOS
-         * ========================
-         * 
-         * Lista de plugins Babel que se ejecutan durante la transformación:
-         * - babel-plugin-react-compiler: Plugin experimental de React 19
-         *   que optimiza automáticamente componentes sin necesidad de
-         *   useMemo, useCallback, React.memo manual
-         */
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
-  ],
+  plugins: [react()],
 })
 
 /**

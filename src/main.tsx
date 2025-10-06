@@ -24,6 +24,8 @@ import './index.css'
 
 // Componente principal de la aplicación
 import App from './App.tsx'
+// Componente de prueba temporal
+import TestApp from './TestApp.tsx'
 
 /**
  * CONFIGURACIÓN DE RENDERIZADO PRINCIPAL
@@ -51,7 +53,7 @@ createRoot(document.getElementById('root')!).render(
       - Validar que los effects tienen cleanup apropiado
       - Solo afecta desarrollo, se elimina automáticamente en producción
     */}
-    <App />
+    <TestApp />
   </StrictMode>,
 )
 

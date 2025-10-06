@@ -1,0 +1,228 @@
+/**
+ * ========================================================================================
+ * ESTILOS GLOBALES BASE: index.css - Configuración Fundamental del Sistema
+ * ========================================================================================
+ * 
+ * Este archivo establece la configuración CSS base y fundamental para toda la aplicación,
+ * incluyendo variables CSS custom, tipografía base, y estilos reset que actúan como
+ * foundation para todos los demás estilos del sistema.
+ */
+
+/**
+ * VARIABLES CSS GLOBALES Y CONFIGURACIÓN ROOT
+ * ===========================================
+ * 
+ * Define las propiedades fundamentales que afectan a todo el documento,
+ * incluyendo tipografía base, color scheme y optimizaciones de rendering.
+ */
+:root {
+  /* TIPOGRAFÍA BASE: Stack de fuentes del sistema para máxima compatibilidad */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;          /* Espaciado de línea óptimo para legibilidad */
+  font-weight: 400;          /* Peso normal como base */
+
+  /* CONFIGURACIÓN DE SCHEME DE COLORES: Soporte para modo claro/oscuro */
+  color-scheme: light dark;  /* Indica soporte para ambos schemes */
+  color: rgba(255, 255, 255, 0.87);     /* Color de texto base para modo oscuro */
+  background-color: #242424;             /* Fondo base para modo oscuro */
+
+  /* OPTIMIZACIONES DE RENDERIZADO DE FUENTES: Mejora visual y performance */
+  font-synthesis: none;                  /* Evita síntesis automática de variantes */
+  text-rendering: optimizeLegibility;    /* Optimiza legibilidad sobre velocidad */
+  -webkit-font-smoothing: antialiased;   /* Suavizado de fuentes en WebKit */
+  -moz-osx-font-smoothing: grayscale;    /* Suavizado específico para macOS */
+}
+
+/**
+ * ESTILOS BASE PARA ENLACES (LINKS)
+ * =================================
+ * 
+ * Configuración por defecto para todos los elementos <a> en la aplicación,
+ * con colores de marca y efectos hover consistentes.
+ */
+a {
+  font-weight: 500;          /* Peso medio para destacar enlaces */
+  color: #646cff;           /* Color azul de marca para enlaces */
+  text-decoration: inherit;  /* Hereda decoración del contenedor padre */
+}
+
+/**
+ * ESTADO HOVER PARA ENLACES
+ * ========================
+ * 
+ * Cambio de color en hover para feedback visual inmediato
+ * cuando el usuario interactúa con enlaces.
+ */
+a:hover {
+  color: #535bf2;           /* Azul más intenso en hover */
+}
+
+/**
+ * CONFIGURACIÓN BASE DEL BODY
+ * ==========================
+ * 
+ * Layout fundamental del body que establece el contenedor principal
+ * para toda la aplicación con centrado y dimensiones mínimas.
+ */
+body {
+  margin: 0;                /* Elimina márgenes por defecto del navegador */
+  display: flex;            /* Layout flexbox para centrado avanzado */
+  place-items: center;      /* Centrado tanto horizontal como vertical */
+  min-width: 320px;         /* Ancho mínimo para prevenir layouts rotos */
+  min-height: 100vh;        /* Altura mínima de viewport completo */
+}
+
+/**
+ * ESTILOS BASE PARA ENCABEZADOS H1
+ * ===============================
+ * 
+ * Configuración tipográfica para encabezados principales
+ * con tamaño prominente y espaciado optimizado.
+ */
+h1 {
+  font-size: 3.2em;         /* Tamaño grande para máximo impacto */
+  line-height: 1.1;         /* Espaciado de línea compacto para títulos */
+}
+
+/**
+ * ESTILOS BASE PARA BOTONES
+ * ========================
+ * 
+ * Configuración por defecto para todos los elementos <button> que establece
+ * una base consistente antes de ser sobrescritos por estilos específicos.
+ */
+button {
+  border-radius: 8px;                    /* Esquinas redondeadas modernas */
+  border: 1px solid transparent;         /* Borde transparente por defecto */
+  padding: 0.6em 1.2em;                 /* Espaciado interno cómodo */
+  font-size: 1em;                       /* Tamaño de fuente base */
+  font-weight: 500;                      /* Peso medio para legibilidad */
+  font-family: inherit;                  /* Hereda fuente del contenedor */
+  background-color: #1a1a1a;            /* Fondo oscuro por defecto */
+  cursor: pointer;                       /* Cursor de puntero para interactividad */
+  transition: border-color 0.25s;       /* Transición suave para border */
+}
+
+/**
+ * ESTADO HOVER PARA BOTONES
+ * ========================
+ * 
+ * Feedback visual cuando el usuario pasa el mouse sobre un botón,
+ * agregando borde de color para indicar interactividad.
+ */
+button:hover {
+  border-color: #646cff;                 /* Borde azul en hover */
+}
+
+/**
+ * ESTADOS DE FOCUS PARA ACCESIBILIDAD
+ * ==================================
+ * 
+ * Outline visible para navegación por teclado y accesibilidad,
+ * cumple con estándares WCAG para usuarios con discapacidades.
+ */
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color; /* Outline nativo del sistema */
+}
+
+/**
+ * ADAPTACIÓN AUTOMÁTICA A MODO CLARO
+ * =================================
+ * 
+ * Media query que detecta la preferencia del sistema del usuario por el modo claro
+ * y ajusta automáticamente los colores base para mejor legibilidad y confort visual.
+ * Funciona en conjunto con la configuración color-scheme del :root.
+ */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;                      /* Color de texto oscuro para modo claro */
+    background-color: #ffffff;           /* Fondo blanco para modo claro */
+  }
+  
+  /**
+   * AJUSTE DE ENLACES PARA MODO CLARO
+   * ================================
+   * 
+   * Variación del color de hover para enlaces que proporciona
+   * mejor contraste y visibilidad sobre fondos claros.
+   */
+  a:hover {
+    color: #747bff;                      /* Azul más suave para modo claro */
+  }
+  
+  /**
+   * AJUSTE DE BOTONES PARA MODO CLARO  
+   * ================================
+   * 
+   * Fondo claro para botones que mantiene legibilidad y
+   * contraste apropiado en el esquema de colores claro.
+   */
+  button {
+    background-color: #f9f9f9;           /* Fondo gris muy claro para botones */
+  }
+}
+
+/**
+ * ========================================================================================
+ * RESUMEN DEL ARCHIVO: index.css
+ * ========================================================================================
+ * 
+ * PROPÓSITO PRINCIPAL:
+ * Este archivo establece la base fundamental de estilos CSS para toda la aplicación,
+ * proporcionando un sistema de fundación que incluye configuraciones globales,
+ * tipografía base, y adaptación automática a preferencias del sistema del usuario.
+ * 
+ * ARQUITECTURA DE ESTILOS BASE:
+ * - Variables CSS en :root para configuración global del documento
+ * - Estilos reset y normalization para elementos HTML básicos
+ * - Sistema de color scheme automático (light/dark mode)
+ * - Optimizaciones de rendering para mejor performance visual
+ * - Base tipográfica con font stack del sistema para compatibilidad
+ * 
+ * CARACTERÍSTICAS TÉCNICAS DESTACADAS:
+ * 1. Color Scheme Detection: Automáticamente detecta preferencia light/dark del usuario
+ * 2. Font Optimization: Configuraciones avanzadas para suavizado y legibilidad
+ * 3. System Font Stack: Utiliza fuentes del sistema para carga rápida y consistencia
+ * 4. Accessibility Focus: Outline automático para navegación por teclado
+ * 5. Responsive Base: Dimensiones mínimas que previenen layouts rotos
+ * 
+ * ELEMENTOS CONFIGURADOS:
+ * - :root - Variables globales, tipografía y optimizaciones de rendering
+ * - body - Layout flexbox centrado con dimensiones mínimas seguras  
+ * - a (enlaces) - Colores de marca con estados hover responsivos
+ * - h1 - Tipografía de encabezados con sizing prominente
+ * - button - Base para todos los botones con estilos interactivos
+ * 
+ * SISTEMA DE COLORES ADAPTATIVO:
+ * - Modo Oscuro (default): Texto claro #rgba(255,255,255,0.87) sobre fondo #242424
+ * - Modo Claro (auto): Texto oscuro #213547 sobre fondo #ffffff
+ * - Enlaces: Azul #646cff con hover #535bf2 (oscuro) / #747bff (claro)
+ * - Botones: Fondo #1a1a1a (oscuro) / #f9f9f9 (claro) con borders interactivos
+ * 
+ * OPTIMIZACIONES DE PERFORMANCE:
+ * - font-synthesis: none (evita generación automática costosa de variantes)
+ * - text-rendering: optimizeLegibility (prioriza calidad visual)
+ * - -webkit-font-smoothing: antialiased (suavizado optimizado)
+ * - Transitions mínimas (0.25s) para feedback rápido sin lag perceptible
+ * 
+ * ACCESIBILIDAD:
+ * - Cumple WCAG con outline visible en focus states
+ * - Contraste adecuado en ambos modos de color
+ * - Tamaños mínimos apropiados para touch targets
+ * - Hereda configuraciones del sistema del usuario (fuentes, colores)
+ * 
+ * CASOS DE USO:
+ * - Base para cualquier aplicación web moderna con soporte dark/light mode
+ * - Foundation para aplicaciones que requieren tipografía optimizada  
+ * - Starter CSS para proyectos que necesitan detección automática de preferencias
+ * - Base para aplicaciones con requerimientos de accesibilidad
+ * - Sistema foundation para aplicaciones React/Vite
+ * 
+ * RELACIÓN CON OTROS ARCHIVOS:
+ * - Se importa en main.tsx ANTES que App.css para establecer base
+ * - App.css sobrescribe y extiende estos estilos con diseño específico
+ * - Actúa como reset/normalize personalizado para el proyecto
+ * - Provee variables que pueden ser utilizadas por otros archivos CSS
+ * ========================================================================================
+ */

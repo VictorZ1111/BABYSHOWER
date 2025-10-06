@@ -1,0 +1,121 @@
+# ========================================================================================
+# CONFIGURACIÓN GITIGNORE: Baby Shower App - Archivos y Directorios Excluidos
+# ========================================================================================
+# 
+# Este archivo define qué archivos y directorios deben ser ignorados por Git,
+# evitando que se incluyan en el repositorio elementos temporales, builds,
+# dependencias, configuraciones locales y archivos sensibles.
+
+# ========================================================================================
+# ARCHIVOS DE LOGS Y DEBUG
+# ========================================================================================
+# 
+# Logs generados por la aplicación, package managers y herramientas de desarrollo
+# que contienen información temporal y específica del entorno local.
+
+logs                    # Directorio de logs generales
+*.log                   # Todos los archivos con extensión .log
+npm-debug.log*          # Logs de debug de npm (incluyendo versiones)
+yarn-debug.log*         # Logs de debug de Yarn package manager  
+yarn-error.log*         # Logs de errores específicos de Yarn
+pnpm-debug.log*         # Logs de debug de pnpm (package manager alternativo)
+lerna-debug.log*        # Logs de Lerna (herramienta monorepo)
+
+# ========================================================================================
+# DEPENDENCIAS Y ARCHIVOS DE BUILD
+# ========================================================================================
+#
+# Directorios y archivos generados automáticamente que no deben versionarse
+# ya que se pueden recrear desde package.json y scripts de build.
+
+node_modules            # Dependencias de Node.js (se instalan con npm/yarn/pnpm)
+dist                    # Build de producción generado por Vite
+dist-ssr                # Build para Server-Side Rendering (si aplica)
+*.local                 # Archivos de configuración local (ej: .env.local)
+
+# ========================================================================================
+# CONFIGURACIONES DE EDITORES E IDEs
+# ========================================================================================
+#
+# Archivos y directorios específicos de editores que contienen configuraciones
+# personales del desarrollador y no deben compartirse en el repositorio.
+
+# VISUAL STUDIO CODE
+.vscode/*               # Toda la configuración de VS Code
+!.vscode/extensions.json # EXCEPCIÓN: Lista de extensiones recomendadas (se incluye)
+
+# OTROS EDITORES E IDEs
+.idea                   # IntelliJ IDEA / WebStorm configuraciones
+.DS_Store              # Archivos de sistema macOS (metadatos de Finder)
+*.suo                  # Visual Studio solution user options
+*.ntvs*                # Node.js Tools for Visual Studio
+*.njsproj              # Node.js project files para Visual Studio
+*.sln                  # Visual Studio solution files
+*.sw?                  # Vim swap files (*.swp, *.swo, etc.)
+
+# ========================================================================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO BABY SHOWER
+# ========================================================================================
+#
+# Configuraciones y archivos sensibles específicos de esta aplicación
+# que contienen tokens, claves API o configuraciones de ambiente local.
+
+# Variables de entorno (contienen tokens de Instagram y Cloudinary)
+.env                   # Archivo principal de variables de entorno
+.env.local             # Variables específicas del entorno local
+.env.development.local # Variables para desarrollo local
+.env.test.local        # Variables para testing local
+.env.production.local  # Variables para producción local
+
+# Archivos de configuración temporal
+.vercel                # Configuración local de Vercel CLI
+.netlify               # Configuración local de Netlify (si se usa)
+
+# Archivos de imágenes temporales para testing
+uploads/               # Directorio de imágenes temporales (si existe)
+temp/                  # Archivos temporales de procesamiento
+*.tmp                  # Archivos temporales con extensión .tmp
+
+# ========================================================================================
+# RESUMEN DEL ARCHIVO: .gitignore
+# ========================================================================================
+# 
+# PROPÓSITO PRINCIPAL:
+# Este archivo .gitignore está configurado específicamente para un proyecto React + Vite
+# con integración de APIs externas (Instagram, Cloudinary) y deployment en Vercel.
+# Protege información sensible y evita versionar archivos temporales o generados.
+#
+# CATEGORÍAS PRINCIPALES IGNORADAS:
+# 1. Logs y Debug: Archivos temporales de desarrollo y debugging
+# 2. Dependencies: node_modules y builds que se regeneran automáticamente  
+# 3. Build Artifacts: dist, dist-ssr y otros outputs de compilación
+# 4. Editor Config: Configuraciones personales de IDEs y editores
+# 5. Environment Variables: Archivos .env con tokens y claves API
+# 6. Platform Config: Configuraciones locales de Vercel y otras plataformas
+#
+# ELEMENTOS CRÍTICOS PARA SEGURIDAD:
+# - .env* files: Contienen INSTAGRAM_ACCESS_TOKEN y CLOUDINARY_CREDENTIALS
+# - .vercel/: Configuración local de deployment con datos sensibles
+# - uploads/: Posibles imágenes temporales que no deben versionarse
+#
+# ELEMENTOS INCLUIDOS INTENCIONALMENTE:
+# - .vscode/extensions.json: Lista de extensiones recomendadas para el equipo
+# - package.json & package-lock.json: Dependencias y versiones exactas
+# - src/ directory: Todo el código fuente de la aplicación
+# - public/ directory: Assets estáticos servidos directamente
+#
+# BUENAS PRÁCTICAS IMPLEMENTADAS:
+# - Patrones con wildcards (*) para capturar variaciones de archivos
+# - Separación por categorías con comentarios descriptivos
+# - Inclusión de formatos cross-platform (Windows, macOS, Linux)
+# - Protección de credenciales de APIs externas (Instagram Graph API)
+# - Configuración compatible con workflows de CI/CD
+#
+# CASOS DE USO:
+# - Proyectos React/Vite con APIs de terceros que requieren tokens
+# - Aplicaciones con deployment automatizado en Vercel
+# - Equipos de desarrollo que usan diferentes editores/IDEs
+# - Proyectos que manejan uploads de imágenes temporales
+# - Aplicaciones con configuraciones de ambiente múltiples (dev/prod)
+# ========================================================================================
+node_modules

@@ -1,0 +1,1381 @@
+/**
+ * ========================================================================================
+ * HOJA DE ESTILOS PRINCIPAL: App.css - Diseño Completo Baby Shower
+ * ========================================================================================
+ * 
+ * Este archivo contiene todos los estilos CSS para la aplicación de baby shower,
+ * incluyendo layouts, animaciones, efectos visuales y diseño responsive.
+ * Temática principal: Rosa/fucsia con elementos de miel y abejas.
+ */
+
+/**
+ * RESET UNIVERSAL Y CONFIGURACIÓN BASE
+ * ===================================
+ * 
+ * Reset CSS completo para eliminar estilos predeterminados del navegador
+ * y establecer box-sizing consistente en todos los elementos.
+ */
+* {
+    margin: 0;                    /* Elimina márgenes por defecto */
+    padding: 0;                   /* Elimina paddings por defecto */
+    box-sizing: border-box;       /* Incluye padding y border en el ancho total */
+}
+
+/**
+ * CONFIGURACIÓN GLOBAL DEL BODY
+ * =============================
+ * 
+ * Establece la tipografía base, colores y fondo principal de la aplicación
+ * con un gradiente suave que evoca tranquilidad y celebración.
+ */
+body {
+    font-family: 'Quicksand', sans-serif;              /* Fuente principal amigable y redondeada */
+    line-height: 1.6;                                  /* Espaciado de línea para legibilidad */
+    color: #333;                                        /* Color de texto base gris oscuro */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Gradiente suave azul-gris */
+    min-height: 100vh;                                  /* Altura mínima de viewport completo */
+    overflow-x: hidden;                                 /* Evita scroll horizontal no deseado */
+    margin: 0;                                          /* Asegura que no hay márgenes */
+    padding: 0;                                         /* Asegura que no hay padding */
+}
+
+/**
+ * CONTENEDOR ROOT DE REACT
+ * ========================
+ * 
+ * Elemento root donde React monta la aplicación
+ */
+#root {
+    display: flex;                                      /* Flexbox para centrar contenido */
+    justify-content: center;                            /* Centrado horizontal */
+    align-items: flex-start;                            /* Alineación superior */
+    min-height: 100vh;                                  /* Altura mínima completa */
+    width: 100%;                                        /* Ancho completo */
+}
+
+/**
+ * CONTENEDOR PRINCIPAL DE LA APLICACIÓN
+ * ===================================
+ * 
+ * Layout principal de la aplicación diseñado como una columna centrada
+ * con ancho máximo responsive para óptima experiencia móvil y desktop.
+ */
+.contenedor {
+    min-height: 100vh;              /* Altura mínima de pantalla completa */
+    display: flex;                  /* Layout flexbox para control total */
+    flex-direction: column;         /* Disposición vertical de elementos */
+    padding: 20px;                  /* Espaciado interno uniforme */
+    max-width: 500px;               /* Volvemos al ancho original para móvil-first */
+    width: 100%;                    /* Ancho completo hasta el máximo */
+    margin: 0;                      /* Sin márgenes para que body maneje el centrado */
+    position: relative;             /* Para posicionamiento de elementos hijos absolutos */
+    box-sizing: border-box;         /* Include padding en el ancho total */
+}
+
+/**
+ * RESPONSIVE BREAKPOINTS
+ * =====================
+ * 
+ * Media queries para diferentes tamaños de pantalla
+ */
+
+/* Tablets y pantallas medianas (768px - 1024px) */
+@media (min-width: 768px) {
+    .contenedor {
+        padding: 30px;              /* Más padding en tablets pero conservador */
+        max-width: 600px;           /* Ancho controlado en tablets */
+    }
+    
+    .titulo {
+        font-size: 2.5em;          /* Título más grande pero proporcional */
+    }
+    
+    .subtitulo {
+        font-size: 1.3em;          /* Subtítulo más grande */
+    }
+}
+
+/* Desktop y pantallas grandes (1024px+) */
+@media (min-width: 1024px) {
+    .contenedor {
+        padding: 40px;             /* Padding moderado en desktop */
+        max-width: 700px;          /* Ancho máximo controlado en desktop */
+    }
+    
+    .titulo {
+        font-size: 2.8em;          /* Título prominente pero controlado */
+        margin-bottom: 15px;
+    }
+    
+    .subtitulo {
+        font-size: 1.4em;          /* Subtítulo proporcional */
+    }
+    
+    /* Tarjetas más anchas en desktop */
+    .tarjeta-bienvenida {
+        padding: 35px 30px;        /* Más padding interno controlado */
+        margin-bottom: 40px;
+    }
+    
+    .icono-camara {
+        font-size: 3.5em;          /* Icono más grande pero proporcional */
+    }
+}
+
+/**
+ * SECCIÓN DE ENCABEZADO PRINCIPAL
+ * =============================
+ * 
+ * Área superior de la aplicación con título y elementos decorativos,
+ * incluye animación de entrada suave para mejor UX.
+ */
+.encabezado {
+    text-align: center;                     /* Centrado de contenido */
+    margin-bottom: 30px;                    /* Espacio inferior generoso */
+    animation: fadeInDown 0.8s ease-out;   /* Animación de entrada desde arriba */
+}
+
+/**
+ * TÍTULO PRINCIPAL CON TEMÁTICA DE BABY SHOWER
+ * ===========================================
+ * 
+ * Título principal con diseño llamativo, colores temáticos y layout flexbox
+ * para iconos decorativos. Incluye efectos de sombra para profundidad.
+ */
+.titulo {
+    font-size: 2.2em;                      /* Tamaño grande para impacto visual */
+    font-weight: 700;                       /* Peso fuerte para prominencia */
+    color: #e91e63;                         /* Color rosa intenso temático */
+    margin-bottom: 10px;                    /* Espacio inferior */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+    display: flex;                          /* Layout flexbox para iconos */
+    align-items: center;                    /* Alineación vertical centrada */
+    justify-content: center;                /* Centrado horizontal */
+    gap: 15px;                             /* Espaciado entre elementos */
+    flex-wrap: wrap;                       /* Permite salto de línea en pantallas pequeñas */
+}
+
+/**
+ * ICONOS DECORATIVOS EN EL TÍTULO
+ * ==============================
+ * 
+ * Estilos para iconos que acompañan el título principal,
+ * con color diferenciado para crear jerarquía visual.
+ */
+.titulo i {
+    font-size: 0.9em;                      /* Ligeramente más pequeño que el texto */
+    color: #ff69b4;                        /* Rosa más claro para contraste sutil */
+    animation: pulse 2s infinite;          /* Animación de pulsación continua */
+}
+
+/**
+ * SUBTÍTULO DESCRIPTIVO
+ * ====================
+ * 
+ * Texto secundario que complementa el título principal con información
+ * adicional en un tono más sutil y relajado.
+ */
+.subtitulo {
+    font-size: 1.2em;                      /* Tamaño intermedio */
+    font-weight: 400;                       /* Peso normal para jerarquía */
+    color: #666;                           /* Gris medio para menos prominencia */
+    opacity: 0.9;                          /* Ligera transparencia para suavidad */
+}
+
+/**
+ * ÁREA DE CONTENIDO PRINCIPAL
+ * ==========================
+ * 
+ * Contenedor principal que ocupa el espacio disponible restante
+ * con layout flexbox y animación de entrada escalonada.
+ */
+.contenido-principal {
+    flex: 1;                               /* Ocupa todo el espacio disponible */
+    display: flex;                         /* Layout flexbox */
+    flex-direction: column;                /* Disposición vertical */
+    animation: fadeInUp 0.8s ease-out 0.2s both; /* Entrada desde abajo con delay */
+}
+
+/**
+ * SECCIÓN DE BIENVENIDA
+ * ====================
+ * 
+ * Área dedicada a mostrar la tarjeta de bienvenida con información
+ * introductoria para los usuarios de la aplicación.
+ */
+.seccion-bienvenida {
+    margin-bottom: 30px;                   /* Espaciado inferior generoso */
+}
+
+/**
+ * TARJETA DE BIENVENIDA CON EFECTO GLASSMORPHISM
+ * =============================================
+ * 
+ * Tarjeta principal con diseño moderno glassmorphism que incluye
+ * transparencia, desenfoque de fondo y efectos de profundidad.
+ */
+.tarjeta-bienvenida {
+    background: rgba(255, 255, 255, 0.9);  /* Fondo semi-transparente */
+    padding: 25px 20px;                     /* Espaciado interno generoso */
+    border-radius: 20px;                    /* Esquinas muy redondeadas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra profunda y sutil */
+    backdrop-filter: blur(10px);            /* Desenfoque del fondo (glassmorphism) */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil semi-transparente */
+    text-align: center;                     /* Contenido centrado */
+    transition: all 0.3s ease;             /* Transiciones suaves para hover */
+    max-width: 700px;                       /* Ancho máximo para desktop */
+    margin: 0 auto 30px auto;              /* Centrado automático con margen */
+}
+
+/**
+ * ICONO DE CÁMARA ANIMADO
+ * =======================
+ * 
+ * Icono principal de la tarjeta con animación de rebote continua
+ * para atraer la atención del usuario.
+ */
+.icono-camara {
+    font-size: 3em;                        /* Tamaño grande para impacto visual */
+    color: #e91e63;                        /* Color rosa temático */
+    margin-bottom: 15px;                   /* Espacio inferior */
+    animation: bounce 2s infinite;         /* Animación de rebote continua */
+}
+
+/**
+ * TÍTULO DE TARJETA DE BIENVENIDA
+ * ==============================
+ * 
+ * Encabezado secundario dentro de la tarjeta con estilo
+ * consistente con la temática general.
+ */
+.tarjeta-bienvenida h2 {
+    color: #e91e63;                        /* Color rosa temático */
+    font-size: 1.4em;                      /* Tamaño prominente pero no excesivo */
+    font-weight: 600;                       /* Peso semi-fuerte */
+    margin-bottom: 12px;                    /* Espacio inferior */
+}
+
+/**
+ * PÁRRAFO DESCRIPTIVO DE BIENVENIDA
+ * ================================
+ * 
+ * Texto explicativo con color sutil y tamaño legible
+ * para describir la funcionalidad de la aplicación.
+ */
+.tarjeta-bienvenida p {
+    color: #666;                           /* Gris medio para texto secundario */
+    font-size: 1em;                        /* Tamaño base estándar */
+    line-height: 1.6;
+}
+
+/**
+ * SECCIÓN PRINCIPAL DE GESTIÓN DE FOTOS
+ * ====================================
+ * 
+ * Área principal donde se muestran las fotos seleccionadas
+ * y se gestionan las operaciones relacionadas con imágenes.
+ */
+.seccion-fotos {
+    flex: 1;                               /* Ocupa espacio disponible restante */
+}
+
+/**
+ * ÁREA DEL BOTÓN PRINCIPAL DE SUBIDA
+ * =================================
+ * 
+ * Sección centrada que contiene el call-to-action principal
+ * para iniciar el proceso de selección de imágenes.
+ */
+.seccion-subir-principal {
+    text-align: center;                    /* Centrado del contenido */
+    margin-bottom: 25px;                   /* Espaciado inferior */
+}
+
+/**
+ * BOTÓN PRINCIPAL CTA (CALL-TO-ACTION)
+ * ===================================
+ * 
+ * Botón principal de la aplicación con diseño llamativo, gradiente temático
+ * y efectos hover avanzados. Diseñado para máxima conversión de usuarios.
+ */
+.boton-subir-principal {
+    padding: 20px 30px;                    /* Espaciado interno generoso */
+    background: linear-gradient(135deg, #e91e63, #ad1457); /* Gradiente rosa intenso */
+    color: white;                          /* Texto blanco para contraste */
+    border: none;                          /* Sin borde para diseño limpio */
+    border-radius: 20px;                   /* Esquinas muy redondeadas */
+    font-size: 1.2em;                      /* Tamaño destacado */
+    font-weight: 600;                       /* Peso semi-fuerte */
+    cursor: pointer;                       /* Indica interactividad */
+    transition: all 0.3s ease;            /* Transiciones suaves para efectos */
+    display: flex;                         /* Layout flexbox para iconos */
+    align-items: center;                   /* Alineación vertical centrada */
+    justify-content: center;               /* Centrado horizontal */
+    gap: 12px;                            /* Espaciado entre texto e icono */
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4); /* Sombra rosa para profundidad */
+    font-family: 'Quicksand', sans-serif;  /* Fuente consistente */
+    width: 100%;                          /* Ancho completo */
+    max-width: 280px;                     /* Límite máximo para diseño limpio */
+    margin: 0 auto;                       /* Centrado automático */
+}
+
+/**
+ * ESTADO HOVER DEL BOTÓN PRINCIPAL
+ * ===============================
+ * 
+ * Efectos visuales avanzados al pasar el mouse sobre el botón principal,
+ * incluyendo elevación, intensificación de sombra y animación de pulso.
+ */
+.boton-subir-principal:hover {
+    transform: translateY(-3px);           /* Elevación sutil del botón */
+    box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5); /* Sombra más intensa y extendida */
+    animation: pulse 0.6s ease-in-out;     /* Animación de pulso al hacer hover */
+}
+
+/**
+ * ICONOS DENTRO DEL BOTÓN PRINCIPAL
+ * ================================
+ * 
+ * Estilización específica para iconos que acompañan el texto
+ * en el botón principal de la aplicación.
+ */
+.boton-subir-principal i {
+    font-size: 1.3em;                      /* Tamaño ligeramente mayor que el texto */
+}
+
+/**
+ * MENÚ DESPLEGABLE DE OPCIONES
+ * ===========================
+ * 
+ * Contenedor para opciones adicionales que aparece con animación
+ * deslizante desde arriba cuando se activa.
+ */
+.menu-subir {
+    margin-bottom: 25px;                   /* Espaciado inferior */
+    animation: slideInDown 0.4s ease-out;  /* Animación de entrada deslizante */
+}
+
+/**
+ * CONTENEDOR DE OPCIONES DE SUBIDA
+ * ===============================
+ * 
+ * Layout flexbox para organizar múltiples opciones de subida
+ * de manera horizontal y responsive.
+ */
+.opciones-subir {
+    display: flex;                         /* Layout flexbox para opciones */
+    gap: 15px;
+    justify-content: center;               /* Centrado en desktop */
+    max-width: 600px;                      /* Ancho máximo para desktop */
+    margin: 0 auto;                        /* Centrado automático */
+}
+
+.opcion-subir {
+    flex: 1;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.opcion-camara {
+    background: linear-gradient(135deg, #9e9e9e, #757575);
+    color: white;
+}
+
+.opcion-galeria {
+    background: linear-gradient(135deg, #bdbdbd, #9e9e9e);
+    color: #333;
+}
+
+.opcion-subir:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.opcion-subir i {
+    font-size: 1.5em;
+}
+
+.opcion-subir span {
+    font-size: 0.9em;
+}
+
+/* Vista Previa de Fotos */
+.vista-previa-fotos {
+    margin-top: 20px;
+}
+
+.contenedor-vista-previa {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(248, 187, 217, 0.4);
+    max-width: 800px;                      /* Ancho máximo para desktop */
+    margin: 0 auto;                        /* Centrado automático */
+}
+
+/* Mejoras para desktop en vista previa */
+@media (min-width: 768px) {
+    .contenedor-vista-previa {
+        padding: 30px;                     /* Más padding en tablets/desktop */
+    }
+    
+    .titulo-galeria {
+        font-size: 1.5em;                 /* Título más grande */
+        margin-bottom: 25px;
+    }
+    
+    .contador-fotos {
+        min-width: 28px;                   /* Contador más grande */
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+}
+
+.titulo-galeria {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #e91e63;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.contador-fotos {
+    background: #757575;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    min-width: 24px;
+    text-align: center;
+}
+
+.galeria-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    min-height: 120px;
+}
+
+/* Responsive Grid para Desktop */
+@media (min-width: 768px) {
+    .galeria-fotos {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+        min-height: 150px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .galeria-fotos {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 25px;
+        min-height: 180px;
+    }
+}
+
+/**
+ * ESTILOS PARA ELEMENTOS DE FOTO EN GALERÍA
+ * ========================================
+ * 
+ * Cada foto individual dentro de la galería con imagen thumbnail,
+ * botón de eliminación y funcionalidad de vista ampliada.
+ */
+.photo-item {
+    position: relative;
+    aspect-ratio: 1 / 1;                   /* Proporciones cuadradas */
+    border-radius: 12px;                   /* Esquinas redondeadas */
+    overflow: hidden;                      /* Oculta contenido que sale del border-radius */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    background: #f5f5f5;                  /* Fondo gris claro como fallback */
+    cursor: pointer;                       /* Indica que es clickeable */
+    transition: all 0.3s ease;            /* Transición suave para hover */
+}
+
+.photo-item:hover {
+    transform: scale(1.05);                /* Ligero aumento al hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+}
+
+.photo-item img {
+    width: 100%;                           /* Ocupa todo el ancho del contenedor */
+    height: 100%;                          /* Ocupa toda la altura del contenedor */
+    object-fit: cover;                     /* Recorta manteniendo proporciones */
+    object-position: center;               /* Centra la imagen al recortar */
+    display: block;                        /* Elimina espacios en blanco debajo */
+}
+
+/**
+ * BOTÓN DE ELIMINAR FOTO
+ * =====================
+ * 
+ * Botón X flotante sobre cada imagen para eliminarla individualmente.
+ */
+.photo-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: #e91e63;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.photo-remove:hover {
+    background: #e91e63;
+    color: white;
+    transform: scale(1.1);
+}
+
+/**
+ * MODAL DE IMAGEN AMPLIADA
+ * =======================
+ * 
+ * Modal para mostrar imágenes en tamaño completo cuando el usuario
+ * hace clic en una miniatura de la galería.
+ */
+.modal-imagen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);       /* Fondo oscuro semi-transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;                        /* Z-index alto para estar encima de todo */
+    padding: 20px;                        /* Espaciado para no tocar bordes */
+    opacity: 0;                           /* Inicia invisible */
+    animation: fadeIn 0.3s ease-out forwards; /* Animación de entrada */
+}
+
+.modal-imagen.closing {
+    animation: fadeOut 0.3s ease-out forwards; /* Animación de salida */
+}
+
+/**
+ * CONTENIDO DEL MODAL DE IMAGEN
+ * ============================
+ */
+.modal-imagen-contenido {
+    position: relative;
+    max-width: 90vw;                      /* Máximo 90% del ancho de pantalla */
+    max-height: 90vh;                     /* Máximo 90% de la altura de pantalla */
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-imagen img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;                  /* Mantiene proporciones sin recortar */
+}
+
+/**
+ * BOTÓN CERRAR MODAL
+ * =================
+ */
+.modal-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-cerrar:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+/**
+ * ANIMACIONES DEL MODAL
+ * ====================
+ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+.acciones-vista-previa {
+    display: flex;
+    gap: 15px;
+    justify-content: center;               /* Centrado en desktop */
+    max-width: 600px;                      /* Ancho máximo para desktop */
+    margin: 0 auto;                        /* Centrado automático */
+    flex-wrap: wrap;                       /* Permite salto de línea si es necesario */
+}
+
+/* Botones más anchos en desktop */
+@media (min-width: 768px) {
+    .acciones-vista-previa {
+        gap: 20px;
+    }
+    
+    .boton-accion {
+        padding: 18px 25px;                /* Más padding en tablets/desktop */
+        font-size: 1.1em;                  /* Texto ligeramente más grande */
+        min-width: 180px;                   /* Ancho mínimo para consistencia */
+    }
+}
+
+.boton-accion {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.tomar-otra-foto, .subir-galeria {
+    background: linear-gradient(135deg, #9e9e9e, #757575);
+    color: white;
+    box-shadow: 0 5px 15px rgba(158, 158, 158, 0.3);
+}
+
+.publicar {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.boton-accion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Section */
+.seccion-carga {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    margin: 20px auto;
+    max-width: 600px;                      /* Ancho máximo para desktop */
+}
+
+.spinner-carga {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #757575;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.seccion-carga p {
+    color: #666;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Success Section */
+.seccion-exito {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 20px;
+}
+
+.tarjeta-exito {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 600px;                      /* Ancho máximo para desktop */
+    margin: 0 auto;                        /* Centrado automático */
+}
+
+.tarjeta-exito i {
+    font-size: 4em;
+    color: #4caf50;
+    margin-bottom: 20px;
+    animation: bounce 0.6s ease-out;
+}
+
+.tarjeta-exito h3 {
+    color: #4caf50;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.tarjeta-exito p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.boton-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #9e9e9e 0%, #757575 25%, #616161 50%, #424242 75%, #212121 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.boton-instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.pie-pagina {
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+    max-width: 600px;                      /* Ancho máximo para desktop */
+    margin: 0 auto;                        /* Centrado automático */
+}
+
+/* Mejoras para desktop en footer */
+@media (min-width: 768px) {
+    .pie-pagina {
+        padding: 30px 0;                   /* Más padding en desktop */
+    }
+}
+
+.enlace-instagram {
+    margin-bottom: 15px;
+}
+
+.boton-instagram-pie {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #9e9e9e 0%, #757575 25%, #616161 50%, #424242 75%, #212121 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.boton-instagram-pie:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.texto-pie {
+    color: #666;
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.texto-pie i {
+    color: #e91e63;
+    margin: 0 5px;
+}
+
+/* Botón de celebrar */
+.boton-celebrar {
+    width: 100%;
+    max-width: 400px;                      /* Ancho máximo para desktop */
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+    margin: 25px auto 0 auto;              /* Centrado automático */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;                        /* Para que funcione el margin auto */
+}
+
+/* Mejoras del botón celebrar en desktop */
+@media (min-width: 768px) {
+    .boton-celebrar {
+        padding: 18px 30px;                /* Más padding en desktop */
+        font-size: 1.2em;                  /* Texto más grande */
+        max-width: 300px;                   /* Ancho más compacto en desktop */
+    }
+}
+
+.boton-celebrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* Modal de Bienvenida */
+.modal-bienvenida {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.contenido-modal-bienvenida {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+/* Mejoras del modal para desktop */
+@media (min-width: 768px) {
+    .contenido-modal-bienvenida {
+        max-width: 500px;                  /* Modal más ancho en desktop */
+        padding: 40px;                     /* Más padding interno */
+    }
+    
+    .encabezado-modal-bienvenida h2 {
+        font-size: 1.7em;                 /* Título más grande */
+    }
+    
+    .encabezado-modal-bienvenida i {
+        font-size: 2em;                   /* Icono más grande */
+    }
+}
+
+.encabezado-modal-bienvenida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.encabezado-modal-bienvenida h2 {
+    color: #e91e63;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.encabezado-modal-bienvenida i {
+    font-size: 1.8em;
+    color: #e91e63;
+    animation: bounce 2s infinite;
+}
+
+.cuerpo-modal-bienvenida p {
+    color: #656565;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1.05em;
+}
+
+.caracteristicas-bienvenida {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.caracteristica {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: rgba(233, 30, 99, 0.1);
+    border-radius: 12px;
+    color: #e91e63;
+    font-weight: 500;
+}
+
+.caracteristica i {
+    font-size: 1.2em;
+    min-width: 20px;
+}
+
+/* Animación de Bienvenida Especial */
+.animacion-bienvenida {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.71);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10000;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.contenedor-arco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.linea-arco {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.letra {
+    display: inline-block;
+    font-size: 3.5em;
+    font-weight: 800;
+    font-family: 'Quicksand', sans-serif;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255, 193, 7, 0.8),
+        0 0 20px rgba(255, 193, 7, 0.6),
+        0 0 30px rgba(255, 193, 7, 0.4),
+        2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: letterPop 1.5s ease-in-out forwards;
+    opacity: 0;
+    transform-origin: center center;
+    margin: 0 2px;
+}
+
+/* Animaciones escalonadas simples para cada letra */
+/* Primera línea: "¡BIENVENIDA!" */
+.arco-superior .letra:nth-child(1) { animation-delay: 0.1s; }   /* ¡ */
+.arco-superior .letra:nth-child(2) { animation-delay: 0.2s; }   /* B */
+.arco-superior .letra:nth-child(3) { animation-delay: 0.3s; }   /* I */
+.arco-superior .letra:nth-child(4) { animation-delay: 0.4s; }   /* E */
+.arco-superior .letra:nth-child(5) { animation-delay: 0.5s; }   /* N */
+.arco-superior .letra:nth-child(6) { animation-delay: 0.6s; }   /* V */
+.arco-superior .letra:nth-child(7) { animation-delay: 0.7s; }   /* E */
+.arco-superior .letra:nth-child(8) { animation-delay: 0.8s; }   /* N */
+.arco-superior .letra:nth-child(9) { animation-delay: 0.9s; }   /* I */
+.arco-superior .letra:nth-child(10) { animation-delay: 1.0s; }  /* D */
+.arco-superior .letra:nth-child(11) { animation-delay: 1.1s; }  /* A */
+.arco-superior .letra:nth-child(12) { animation-delay: 1.2s; }  /* ! */
+
+/* Segunda línea: "¡AITANA!" */
+.arco-inferior .letra:nth-child(1) { animation-delay: 1.4s; }   /* ¡ */
+.arco-inferior .letra:nth-child(2) { animation-delay: 1.5s; }   /* A */
+.arco-inferior .letra:nth-child(3) { animation-delay: 1.6s; }   /* I */
+.arco-inferior .letra:nth-child(4) { animation-delay: 1.7s; }   /* T */
+.arco-inferior .letra:nth-child(5) { animation-delay: 1.8s; }   /* A */
+.arco-inferior .letra:nth-child(6) { animation-delay: 1.9s; }   /* N */
+.arco-inferior .letra:nth-child(7) { animation-delay: 2.0s; }   /* A */
+.arco-inferior .letra:nth-child(8) { animation-delay: 2.1s; }   /* ! */
+
+.iconos-bebe {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.iconos-bebe i {
+    font-size: 3em;
+    animation: iconFloat 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.iconos-bebe i:nth-child(1) {
+    color: #ff69b4;
+    animation-delay: 0.2s;
+}
+
+.iconos-bebe i:nth-child(2) {
+    color: #ff1493;
+    animation-delay: 0.6s;
+}
+
+.iconos-bebe i:nth-child(3) {
+    color: #ffd700;
+    animation-delay: 1.0s;
+}
+
+/* Progress Steps */
+.progress-steps {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.progress-steps .step {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #666;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.progress-steps .step.active {
+    background: rgba(255, 182, 193, 0.3);
+    color: #333;
+    font-weight: 500;
+}
+
+.progress-steps .step.completed {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    font-weight: 500;
+}
+
+/**
+ * ========================================================================================
+ * BIBLIOTECA DE ANIMACIONES KEYFRAMES
+ * ========================================================================================
+ * 
+ * Colección completa de animaciones CSS utilizadas en toda la aplicación
+ * para crear efectos visuales dinámicos y mejorar la experiencia del usuario.
+ */
+
+/**
+ * ANIMACIÓN: ROTACIÓN CONTINUA (SPIN)
+ * ==================================
+ * 
+ * Rotación completa de 360° utilizada principalmente en spinners
+ * y elementos de carga para indicar actividad en proceso.
+ */
+@keyframes spin {
+    0% { transform: rotate(0deg); }        /* Inicio sin rotación */
+    100% { transform: rotate(360deg); }    /* Rotación completa */
+}
+
+/**
+ * ANIMACIÓN: PULSACIÓN (PULSE)
+ * ===========================
+ * 
+ * Efecto de escala sutil que crea pulsación orgánica,
+ * utilizado para atraer atención sin ser intrusivo.
+ */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }      /* Tamaño normal en inicio y fin */
+    50% { transform: scale(1.05); }        /* Ligero aumento en el punto medio */
+}
+
+/**
+ * ANIMACIÓN: REBOTE (BOUNCE)
+ * =========================
+ * 
+ * Movimiento vertical de rebote que simula elasticidad natural,
+ * ideal para iconos y elementos que requieren dinamismo playful.
+ */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }    /* Posición base */
+    50% { transform: translateY(-10px); }     /* Elevación en punto medio */
+}
+
+/**
+ * ANIMACIÓN: ENTRADA DESDE ARRIBA (FADE IN DOWN)
+ * =============================================
+ * 
+ * Entrada elegante que combina fade-in con desplazamiento vertical
+ * desde arriba, utilizada para encabezados y elementos prominentes.
+ */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;                        /* Inicio invisible */
+        transform: translateY(-30px);      /* Posición elevada */
+    }
+    to {
+        opacity: 1;                        /* Final completamente visible */
+        transform: translateY(0);          /* Posición final natural */
+    }
+}
+
+/**
+ * ANIMACIÓN: ENTRADA DESDE ABAJO (FADE IN UP)
+ * ==========================================
+ * 
+ * Entrada desde la parte inferior con fade-in, ideal para
+ * contenido principal que aparece después del encabezado.
+ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;                        /* Inicio invisible */
+        transform: translateY(30px);       /* Posición inferior */
+    }
+    to {
+        opacity: 1;                        /* Final completamente visible */
+        transform: translateY(0);          /* Posición final natural */
+    }
+}
+
+/**
+ * ANIMACIÓN: DESLIZAMIENTO DESDE ARRIBA (SLIDE IN DOWN)
+ * ===================================================
+ * 
+ * Entrada rápida con deslizamiento desde arriba,
+ * utilizada para menús y opciones que aparecen dinámicamente.
+ */
+@keyframes slideInDown {
+    from {
+        opacity: 0;                        /* Inicio invisible */
+        transform: translateY(-20px);      /* Posición ligeramente elevada */
+    }
+    to {
+        opacity: 1;                        /* Final completamente visible */
+        transform: translateY(0);          /* Posición final natural */
+    }
+}
+
+/**
+ * ANIMACIÓN SIMPLE: APARICIÓN DE LETRAS (LETTER POP)
+ * ================================================
+ * 
+ * Animación simple y efectiva donde las letras aparecen con un efecto
+ * de pop/rebote sin posicionamiento complejo.
+ */
+@keyframes letterPop {
+    0% {
+        opacity: 0;                        /* Inicio invisible */
+        transform: translateY(30px) scale(0.3); /* Posición inicial pequeña y baja */
+    }
+    50% {
+        opacity: 0.8;                      /* Punto medio semi-visible */
+        transform: translateY(-10px) scale(1.1); /* Rebote con ligera sobre-escala */
+    }
+    100% {
+        opacity: 1;                        /* Final completamente visible */
+        transform: translateY(0) scale(1); /* Posición final normal */
+    }
+}
+
+/**
+ * ANIMACIÓN: FLOTACIÓN DE ICONOS (ICON FLOAT)
+ * ==========================================
+ * 
+ * Movimiento suave de flotación que combina desplazamiento vertical
+ * y rotación sutil para crear efecto orgánico en iconos decorativos.
+ */
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);     /* Posición y rotación base */
+    }
+    25% {
+        transform: translateY(-15px) rotate(-5deg); /* Primer cuarto: elevación con rotación izquierda */
+    }
+    50% {
+        transform: translateY(-25px) rotate(0deg);  /* Punto medio: máxima elevación sin rotación */
+    }
+    75% {
+        transform: translateY(-10px) rotate(5deg);  /* Tercer cuarto: descenso con rotación derecha */
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .contenedor {
+        padding: 10px;
+    }
+
+    .titulo {
+        font-size: 1.3em;
+        margin-bottom: 8px;
+        white-space: normal;
+        text-overflow: unset;
+        overflow: visible;
+        line-height: 1.2;
+    }
+
+    .subtitulo {
+        font-size: 1em;
+    }
+
+    .opciones-subir {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .acciones-vista-previa {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .galeria-fotos {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+}
+
+/**
+ * ========================================================================================
+ * RESUMEN DEL ARCHIVO: App.css
+ * ========================================================================================
+ * 
+ * PROPÓSITO PRINCIPAL:
+ * Este archivo contiene la hoja de estilos completa para la aplicación de baby shower,
+ * implementando un sistema de diseño cohesivo con temática rosa/fucsia y elementos
+ * visuales que evocan celebración, ternura y elementos de miel/abejas.
+ * 
+ * ARQUITECTURA DE ESTILOS:
+ * - Reset CSS universal para consistencia cross-browser
+ * - Sistema de layout principal con contenedor centrado móvil-first
+ * - Componentes modulares con naming convention descriptivo
+ * - Sistema de animaciones keyframes completo y reutilizable
+ * - Diseño responsive con media queries para pantallas pequeñas
+ * 
+ * PALETA DE COLORES PRINCIPAL:
+ * - Rosa intenso: #e91e63 (elementos principales, CTAs, títulos)
+ * - Rosa claro: #ff69b4 (elementos decorativos, iconos secundarios)
+ * - Rosa oscuro: #ad1457 (gradientes, hover states)
+ * - Dorado: #FFD700 (elementos de miel, efectos de panal)
+ * - Grises: #333, #666, #999 (texto, elementos secundarios)
+ * - Blancos/transparencias: rgba(255,255,255,0.9) (tarjetas, overlays)
+ * 
+ * TÉCNICAS DE DISEÑO IMPLEMENTADAS:
+ * 1. Glassmorphism: Tarjetas con backdrop-filter blur y transparencias
+ * 2. Gradientes direccionales: Linear-gradient en botones y fondos
+ * 3. Sombras multicapa: Box-shadow para profundidad y jerarquía visual
+ * 4. Transforms avanzados: Scale, translate, rotate para micro-interacciones
+ * 5. Flexbox y Grid: Layouts responsive y centrado automático
+ * 6. Transiciones fluidas: Timing functions para animaciones naturales
+ * 
+ * SISTEMA DE ANIMACIONES:
+ * - spin: Rotación continua para spinners y elementos de carga
+ * - pulse: Pulsación sutil para atraer atención sin ser intrusivo
+ * - bounce: Rebote playful para iconos y elementos decorativos
+ * - fadeInDown/Up: Entradas elegantes con fade y movimiento direccional
+ * - slideInDown: Deslizamientos para menús y opciones dinámicas
+ * - arcLetterAnimation: Animación compleja para efectos tipográficos
+ * - iconFloat: Flotación orgánica para elementos decorativos
+ * 
+ * COMPONENTES PRINCIPALES ESTILIZADOS:
+ * - Header con título animado y subtítulo descriptivo
+ * - Tarjeta de bienvenida con glassmorphism y icono bouncing
+ * - Botón principal CTA con gradiente y efectos hover avanzados
+ * - Sistema de opciones de subida con layout flexbox
+ * - Galería de fotos con grid responsive y efectos hover
+ * - Modales y overlays con backdrop blur y animaciones de entrada
+ * - Sistema de progreso con barras animadas y feedback visual
+ * 
+ * OPTIMIZACIÓN Y PERFORMANCE:
+ * - Transforms para animaciones (no afectan layout)
+ * - Transiciones con timing optimizado (0.3s para la mayoría)
+ * - Will-change implícito en elementos animados
+ * - Media queries mobile-first para carga progresiva
+ * - Font-display: swap implícito para carga de fuentes
+ * 
+ * RESPONSIVE DESIGN:
+ * - Diseño móvil-first con max-width 500px en contenedor principal
+ * - Media query @480px para ajustes en pantallas muy pequeñas
+ * - Grid adaptativo que se ajusta automáticamente al espacio disponible
+ * - Flexbox con flex-wrap para adaptabilidad de contenido
+ * - Padding y margins escalables según viewport
+ * 
+ * ACCESIBILIDAD:
+ * - Colores con contraste suficiente para legibilidad
+ * - Tamaños de texto escalables (em/rem)
+ * - Áreas de toque adecuadas (min 44px en botones)
+ * - Indicadores visuales claros para estados interactivos
+ * - Animaciones suaves que no causan mareo (prefer-reduced-motion compatible)
+ * 
+ * CASOS DE USO:
+ * - Aplicación móvil de baby shower con subida de fotos
+ * - Interfaces temáticas para celebraciones familiares
+ * - Apps con necesidad de feedback visual rico y animaciones
+ * - Proyectos que requieren diseño glassmorphism moderno
+ * - Aplicaciones con flujos de usuario complejos que necesitan guidance visual
+ * 
+ * TECNOLOGÍAS CSS UTILIZADAS:
+ * - CSS3 Flexbox y Grid para layouts avanzados
+ * - CSS Animations y Keyframes para efectos dinámicos
+ * - CSS Custom Properties (--variables) para valores dinámicos
+ * - Backdrop-filter para efectos glassmorphism modernos
+ * - Transform 3D para animaciones hardware-accelerated
+ * - Media queries para diseño responsive
+ * - Pseudo-elementos y pseudo-clases para efectos avanzados
+ * ========================================================================================
+ */

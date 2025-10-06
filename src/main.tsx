@@ -22,8 +22,6 @@ import { createRoot } from 'react-dom/client'
 // Estilos globales de la aplicación (reset, variables CSS, fuentes)
 import './index.css'
 
-// Componente principal de la aplicación
-import App from './App.tsx'
 // Componente de prueba temporal
 import TestApp from './TestApp.tsx'
 

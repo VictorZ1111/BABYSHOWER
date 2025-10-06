@@ -13,8 +13,10 @@
  * ========================
  */
 
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import TestApp from './TestApp.tsx'
+import './index.css'
+import App from './App.tsx'
 
 /**
  * CONFIGURACIÓN DE RENDERIZADO PRINCIPAL
@@ -29,7 +31,11 @@ import TestApp from './TestApp.tsx'
  * 3. Renderiza la aplicación envuelta en StrictMode para debugging
  * 4. Monta todos los componentes y inicia el ciclo de vida de React
  */
-createRoot(document.getElementById('root')!).render(<TestApp />)
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
 
 /**
  * ========================================================================================

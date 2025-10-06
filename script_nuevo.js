@@ -170,15 +170,51 @@ async function publishToInstagram() {
     showLoadingSection();
 
     try {
-        // Publicar cada imagen
+        let successCount = 0;
+        let errorCount = 0;
+        
+        // Publicar cada imagen con delay entre publicaciones
         for (let i = 0; i < selectedImages.length; i++) {
             const image = selectedImages[i];
-            await publishSingleImage(image, i + 1);
+            
+            try {
+                // Mostrar progreso
+                updateLoadingText(`Publicando imagen ${i + 1} de ${selectedImages.length}...`);
+                
+                await publishSingleImage(image, i + 1);
+                successCount++;
+                
+                // Esperar entre publicaciones (excepto la última)
+                if (i < selectedImages.length - 1) {
+                    updateLoadingText(`Imagen ${i + 1} publicada. Preparando siguiente...`);
+                    await delay(3000); // Reducido a 3 segundos
+                }
+                
+            } catch (error) {
+                console.error(`Error en imagen ${i + 1}:`, error);
+                errorCount++;
+                
+                // Continuar con las siguientes imágenes
+                if (i < selectedImages.length - 1) {
+                    updateLoadingText(`Error en imagen ${i + 1}. Continuando con la siguiente...`);
+                    await delay(2000);
+                }
+            }
         }
 
-        // Mostrar éxito
-        showSuccessSection();
-        showAlert(`¡${selectedImages.length} foto${selectedImages.length > 1 ? 's' : ''} publicada${selectedImages.length > 1 ? 's' : ''} en Instagram!`, 'success');
+        // Mostrar resultado
+        if (successCount > 0) {
+            showSuccessSection();
+            
+            if (errorCount === 0) {
+                showAlert(`¡${successCount} foto${successCount > 1 ? 's' : ''} publicada${successCount > 1 ? 's' : ''} exitosamente!`, 'success');
+            } else {
+                showAlert(`${successCount} fotos publicadas correctamente. ${errorCount} fotos tuvieron problemas.`, 'warning');
+            }
+        } else {
+            hideLoadingSection();
+            showAlert('No se pudo publicar ninguna foto. Inténtalo de nuevo.', 'error');
+        }
         
         // Limpiar fotos seleccionadas después de un momento
         setTimeout(() => {
@@ -186,7 +222,7 @@ async function publishToInstagram() {
         }, 5000);
 
     } catch (error) {
-        console.error('Error al publicar en Instagram:', error);
+        console.error('Error general al publicar:', error);
         hideLoadingSection();
         showAlert(`Error: ${error.message}`, 'error');
     }
@@ -341,6 +377,9 @@ async function publishInstagramMedia(mediaId) {
     formData.append('creation_id', mediaId);
     formData.append('access_token', INSTAGRAM_CONFIG.ACCESS_TOKEN);
     
+    // Esperar un poco antes de publicar para asegurar que el media esté listo
+    await delay(2000);
+    
     const response = await fetch(url, {
         method: 'POST',
         body: formData
@@ -352,6 +391,11 @@ async function publishInstagramMedia(mediaId) {
     }
     
     return await response.json();
+}
+
+// Función auxiliar para crear delays
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Funciones de interfaz de carga

@@ -1,20 +1,15 @@
-// Componente de prueba simple
+import React from 'react';
+
 function TestApp() {
-  return (
-    <div style={{
-      backgroundColor: 'lightblue', 
-      padding: '20px', 
-      textAlign: 'center',
-      fontSize: '24px',
-      fontWeight: 'bold'
-    }}>
-      ¡FUNCIONA! ✅
-      <br />
-      React está funcionando correctamente
-      <br />
-      Baby Shower App - Test
-    </div>
-  )
+  return React.createElement('div', {
+    style: {
+      backgroundColor: 'red', 
+      padding: '50px', 
+      color: 'white',
+      fontSize: '30px',
+      textAlign: 'center'
+    }
+  }, 'REACT FUNCIONA!!!');
 }
 
 export default TestApp

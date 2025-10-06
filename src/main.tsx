@@ -13,16 +13,7 @@
  * ========================
  */
 
-// React 18 StrictMode para detección de problemas y mejores prácticas
-import { StrictMode } from 'react'
-
-// Nueva API de renderizado de React 18 para renderizado concurrente
 import { createRoot } from 'react-dom/client'
-
-// Estilos globales de la aplicación (reset, variables CSS, fuentes)
-import './index.css'
-
-// Componente de prueba temporal
 import TestApp from './TestApp.tsx'
 
 /**
@@ -38,22 +29,7 @@ import TestApp from './TestApp.tsx'
  * 3. Renderiza la aplicación envuelta en StrictMode para debugging
  * 4. Monta todos los componentes y inicia el ciclo de vida de React
  */
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    {/* 
-      STRICT MODE: Wrapper de Desarrollo
-      =================================
-      
-      StrictMode es un wrapper que ayuda a:
-      - Detectar componentes con efectos secundarios inseguros
-      - Advertir sobre APIs obsoletas o deprecated
-      - Detectar renders adicionales inesperados  
-      - Validar que los effects tienen cleanup apropiado
-      - Solo afecta desarrollo, se elimina automáticamente en producción
-    */}
-    <TestApp />
-  </StrictMode>,
-)
+createRoot(document.getElementById('root')!).render(<TestApp />)
 
 /**
  * ========================================================================================

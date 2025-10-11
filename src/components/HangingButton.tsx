@@ -9,7 +9,6 @@
  */
 
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 /**
@@ -38,8 +37,8 @@ export const HangingButton = ({
   delay = 0 
 }: HangingButtonProps) => {
   
-  // Estado para controlar si está siendo arrastrado por el usuario
-  const [isDragging, setIsDragging] = useState(false);
+  // Estado para controlar si está siendo arrastrado por el usuario (comentado - no usado actualmente)
+  // const [isDragging, setIsDragging] = useState(false);
   
   /**
    * CONFIGURACIÓN: Nueva Animación de Liana
@@ -53,7 +52,8 @@ export const HangingButton = ({
 
   const amplitude = swingAmplitudes[hangingIntensity];
 
-  // Variantes de animación para el nuevo comportamiento
+  // Variantes de animación para el nuevo comportamiento (comentado - no usado actualmente)
+  /*
   const variants = {
     // Estado inicial: Fuera de pantalla (arriba)
     initial: {
@@ -94,7 +94,8 @@ export const HangingButton = ({
         duration: 0.2
       }
     }
-  };  return (
+  };
+  */  return (
     /**
      * CONTENEDOR PRINCIPAL: Sistema de Balanceo
      * ========================================

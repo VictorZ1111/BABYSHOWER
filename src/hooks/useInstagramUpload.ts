@@ -102,7 +102,8 @@ export const useInstagramUpload = () => {
     return performCleanup;
   }, [performCleanup]);
 
-  // Helper para crear timeout con tracking
+  // Helper para crear timeout con tracking (comentado - no usado actualmente)
+  /*
   const createTrackedTimeout = useCallback((callback: () => void, delay: number) => {
     const timeoutId = window.setTimeout(() => {
       timeoutsRef.current.delete(timeoutId);
@@ -112,11 +113,14 @@ export const useInstagramUpload = () => {
     timeoutsRef.current.add(timeoutId);
     return timeoutId;
   }, []);
+  */
 
-  // Helper para registrar URL para cleanup
+  // Helper para registrar URL para cleanup (comentado - no usado actualmente)  
+  /*
   const registerUrlForCleanup = useCallback((url: string) => {
     urlsToCleanupRef.current.add(url);
   }, []);
+  */
 
   // ========================================
   // FUNCIONES DE MANEJO DE ARCHIVOS

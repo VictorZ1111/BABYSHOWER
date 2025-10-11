@@ -1,22 +1,20 @@
 /**
  * ========================================================================================
- * COMPONENTE: HangingButton - Botón Colgante con Temática de Panal de Miel
+ * COMPONENTE: HangingButton - Botón Colgante con Temática Natural de Lianas
  * ========================================================================================
  * 
- * Este componente implementa un botón interactivo con animación de balanceo que simula
- * estar colgando como si fuera suspendido por una cuerda. Incluye efectos visuales
- * de panal de miel y animaciones físicamente realistas.
+ * Este componente implementa un botón que cuelga de una liana verde con hojas,
+ * con animación de caída inicial y balanceo natural. Incluye interactividad
+ * para que responda al movimiento del usuario.
  */
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 /**
- * INTERFAZ: Propiedades del Botón Colgante
- * =======================================
- * 
- * Define todas las configuraciones disponibles para personalizar
- * el comportamiento y apariencia del botón colgante.
+ * INTERFAZ: Propiedades del Botón Colgante con Liana
+ * =================================================
  */
 interface HangingButtonProps {
   children: ReactNode;                                    // Contenido interno del botón
@@ -28,19 +26,8 @@ interface HangingButtonProps {
 }
 
 /**
- * COMPONENTE PRINCIPAL: HangingButton
- * ==================================
- * 
- * Renderiza un botón con animación de balanceo realista que simula estar
- * colgando de una cuerda. Incluye múltiples niveles de intensidad y 
- * efectos interactivos avanzados.
- * 
- * @param children - Contenido interno a mostrar en el botón
- * @param onClick - Callback para manejo de clics
- * @param disabled - Flag para deshabilitar interactividad
- * @param className - Clases CSS adicionales para personalización
- * @param hangingIntensity - Nivel de intensidad del balanceo
- * @param delay - Retraso inicial antes de comenzar animaciones
+ * COMPONENTE PRINCIPAL: HangingButton con Liana
+ * ===========================================
  */
 export const HangingButton = ({ 
   children, 
@@ -48,27 +35,66 @@ export const HangingButton = ({
   disabled = false, 
   className = "",
   hangingIntensity = 'medium',
-  delay = 0
+  delay = 0 
 }: HangingButtonProps) => {
   
+  // Estado para controlar si está siendo arrastrado por el usuario
+  const [isDragging, setIsDragging] = useState(false);
+  
   /**
-   * CONFIGURACIÓN: Amplitudes de Balanceo por Intensidad
-   * ==================================================
-   * 
-   * Define los valores de rotación y desplazamiento vertical para cada
-   * nivel de intensidad de balanceo, simulando diferentes condiciones
-   * físicas (viento ligero, medio, fuerte).
+   * CONFIGURACIÓN: Nueva Animación de Liana
+   * ======================================
    */
   const swingAmplitudes = {
-    light: { rotate: [-1, 1, -1], y: [0, 2, 0] },        // Balanceo sutil
-    medium: { rotate: [-3, 3, -3], y: [0, 4, 0] },       // Balanceo moderado  
-    strong: { rotate: [-5, 5, -5], y: [0, 6, 0] }        // Balanceo intenso
+    light: { rotate: [-2, 2, -2], y: [0, 1, 0] },        
+    medium: { rotate: [-4, 4, -4], y: [0, 2, 0] },       
+    strong: { rotate: [-6, 6, -6], y: [0, 3, 0] }        
   };
 
-  // Selecciona la amplitud correspondiente a la intensidad especificada
   const amplitude = swingAmplitudes[hangingIntensity];
 
-  return (
+  // Variantes de animación para el nuevo comportamiento
+  const variants = {
+    // Estado inicial: Fuera de pantalla (arriba)
+    initial: {
+      y: -150,
+      rotate: 0,
+      opacity: 0
+    },
+    
+    // Animación de caída: Como si fuera una cuerda cayendo
+    falling: {
+      y: 0,
+      opacity: 1,
+      rotate: 0,
+      transition: {
+        duration: 1.2,
+        ease: [0.25, 0.46, 0.45, 0.94], // Easing natural de caída
+        delay: delay
+      }
+    },
+    
+    // Balanceo natural después de caer
+    swinging: {
+      rotate: amplitude.rotate,
+      y: amplitude.y,
+      transition: {
+        duration: 2.5,
+        repeat: Infinity,
+        repeatType: "reverse" as const,
+        ease: "easeInOut",
+        delay: delay + 1.3 // Después de la caída
+      }
+    },
+    
+    // Cuando el usuario interactúa
+    interactive: {
+      scale: 1.05,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };  return (
     /**
      * CONTENEDOR PRINCIPAL: Sistema de Balanceo
      * ========================================

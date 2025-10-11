@@ -1,0 +1,170 @@
+/* ====================================================================
+   ESTILOS ESPECÍFICOS PARA EL COMPONENTE DE BOTÓN CON LIANA
+   ==================================================================== */
+
+/* Contenedor principal de la liana colgante */
+.vine-hanging-container {
+  position: relative;
+  display: inline-block;
+  z-index: 10;
+}
+
+/* Estilos para el nuevo botón con temática de liana */
+.vine-hanging-button {
+  /* Transiciones suaves para todas las propiedades */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Optimización de rendimiento */
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  
+  /* Cursor interactivo */
+  cursor: pointer;
+  
+  /* Sin outline por defecto */
+  outline: none;
+  
+  /* Efecto hover mejorado */
+  position: relative;
+  overflow: visible;
+}
+
+/* Estados hover para el botón de liana */
+.vine-hanging-button:hover {
+  /* Sombra más pronunciada en hover */
+  box-shadow: 
+    0 12px 24px rgba(0,0,0,0.2),
+    inset 0 2px 4px rgba(255,255,255,0.4),
+    inset 0 -2px 4px rgba(0,0,0,0.15) !important;
+  
+  /* Brillo sutil */
+  filter: brightness(1.05);
+}
+
+/* Estado activo/pressed */
+.vine-hanging-button:active {
+  /* Sombra reducida cuando se presiona */
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.25),
+    inset 0 1px 2px rgba(255,255,255,0.2),
+    inset 0 -1px 2px rgba(0,0,0,0.2) !important;
+  
+  /* Brillo reducido */
+  filter: brightness(0.95);
+}
+
+/* Estado disabled para el botón */
+.vine-hanging-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(30%) brightness(0.8);
+  transform: translateZ(0) !important;
+}
+
+/* Efectos de partículas para hover (opcional) */
+.vine-hanging-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    transparent 40%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 60%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.vine-hanging-button:hover::before {
+  opacity: 1;
+}
+
+/* Animación de brillo sutil */
+@keyframes vineGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 8px 16px rgba(0,0,0,0.15),
+      inset 0 2px 4px rgba(255,255,255,0.3),
+      inset 0 -2px 4px rgba(0,0,0,0.1);
+  }
+  50% { 
+    box-shadow: 
+      0 8px 20px rgba(0,0,0,0.18),
+      inset 0 2px 6px rgba(255,255,255,0.4),
+      inset 0 -2px 4px rgba(0,0,0,0.12);
+  }
+}
+
+/* Animación de balanceo natural para la liana */
+@keyframes naturalVineSwing {
+  0% { transform: rotate(0deg) translateY(0px); }
+  25% { transform: rotate(-2deg) translateY(1px); }
+  75% { transform: rotate(2deg) translateY(1px); }
+  100% { transform: rotate(0deg) translateY(0px); }
+}
+
+/* Clase para aplicar la animación de balanceo */
+.vine-swinging {
+  animation: naturalVineSwing 3s ease-in-out infinite;
+}
+
+/* Efectos adicionales para la cuerda/liana */
+.vine-rope {
+  /* Textura de cuerda natural */
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(0,0,0,0.1) 1px,
+      rgba(0,0,0,0.1) 2px
+    );
+}
+
+/* Hojas adicionales que pueden aparecer dinámicamente */
+.vine-leaf {
+  position: absolute;
+  background: #5a8f2f;
+  border-radius: 50% 10px 50% 10px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  opacity: 0.8;
+}
+
+/* Animación sutil para las hojas */
+@keyframes leafSway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.vine-leaf {
+  animation: leafSway 4s ease-in-out infinite;
+}
+
+/* Responsive - En pantallas más pequeñas */
+@media (max-width: 768px) {
+  .vine-hanging-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .vine-rope {
+    height: 40px !important;
+    width: 6px !important;
+  }
+}
+
+/* Modo oscuro (si se implementa) */
+@media (prefers-color-scheme: dark) {
+  .vine-hanging-button {
+    background: linear-gradient(145deg, 
+      #e6b65c 0%,
+      #d4a048 25%, 
+      #c19238 50%,
+      #b8872f 75%,
+      #a67c14 100%);
+  }
+}

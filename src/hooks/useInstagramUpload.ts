@@ -1,7 +1,7 @@
 // ========================================
 // IMPORTACIONES
 // ========================================
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 
 // ========================================
 // CONFIGURACIÓN DE APIs EXTERNAS
@@ -56,7 +56,7 @@ export interface UploadProgress {
 export const useInstagramUpload = () => {
   
   // ========================================
-  // ESTADOS DEL HOOK
+  // ESTADOS Y REFS DEL HOOK
   // ========================================
   
   // Array de imágenes seleccionadas por el usuario
@@ -71,35 +71,162 @@ export const useInstagramUpload = () => {
     isCompleted: false      // No está completado inicialmente
   });
 
+  // Referencias para control de memoria y cancelación
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const timeoutsRef = useRef<Set<number>>(new Set());
+  const urlsToCleanupRef = useRef<Set<string>>(new Set());
+
+  // Función de cleanup optimizada
+  const performCleanup = useCallback(() => {
+    // Cancelar request en progreso
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    
+    // Limpiar todos los timeouts
+    timeoutsRef.current.forEach(timeoutId => {
+      clearTimeout(timeoutId);
+    });
+    timeoutsRef.current.clear();
+    
+    // Limpiar todas las URLs de objetos para liberar memoria
+    urlsToCleanupRef.current.forEach(url => {
+      URL.revokeObjectURL(url);
+    });
+    urlsToCleanupRef.current.clear();
+  }, []);
+
+  // Cleanup automático al desmontar componente
+  useEffect(() => {
+    return performCleanup;
+  }, [performCleanup]);
+
+  // Helper para crear timeout con tracking
+  const createTrackedTimeout = useCallback((callback: () => void, delay: number) => {
+    const timeoutId = window.setTimeout(() => {
+      timeoutsRef.current.delete(timeoutId);
+      callback();
+    }, delay);
+    
+    timeoutsRef.current.add(timeoutId);
+    return timeoutId;
+  }, []);
+
+  // Helper para registrar URL para cleanup
+  const registerUrlForCleanup = useCallback((url: string) => {
+    urlsToCleanupRef.current.add(url);
+  }, []);
+
   // ========================================
   // FUNCIONES DE MANEJO DE ARCHIVOS
   // ========================================
   
-  // Función para procesar archivos seleccionados desde cámara o galería
-  const handleFileSelection = useCallback((files: FileList) => {
+  // Función optimizada para comprimir y redimensionar imágenes
+  const compressAndResizeImage = useCallback(async (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Calcular dimensiones optimizadas (máx 1920px)
+        const maxSize = 1920;
+        let { width, height } = img;
+        
+        if (width > height) {
+          if (width > maxSize) {
+            height = (height * maxSize) / width;
+            width = maxSize;
+          }
+        } else {
+          if (height > maxSize) {
+            width = (width * maxSize) / height;
+            height = maxSize;
+          }
+        }
+        
+        // Configurar canvas
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Optimizaciones de rendering
+        if (ctx) {
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          
+          // Dibujar imagen optimizada
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Comprimir con calidad adaptativa
+          const quality = file.size > 5000000 ? 0.7 : 0.85; // Menos calidad si es muy grande
+          
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const compressedFile = new File([blob], file.name, {
+                type: 'image/jpeg',
+                lastModified: Date.now(),
+              });
+              resolve(compressedFile);
+            } else {
+              resolve(file); // Fallback al archivo original
+            }
+          }, 'image/jpeg', quality);
+        } else {
+          resolve(file);
+        }
+        
+        // Cleanup
+        URL.revokeObjectURL(img.src);
+      };
+      
+      img.onerror = () => resolve(file); // Fallback al archivo original
+      img.src = URL.createObjectURL(file);
+    });
+  }, []);
+
+  // Función para procesar archivos seleccionados desde cámara o galería (OPTIMIZADA)
+  const handleFileSelection = useCallback(async (files: FileList) => {
     // Convierte FileList a Array para poder usar métodos de array
     const fileArray = Array.from(files);
     // Array temporal para nuevas imágenes válidas
     const newImages: ImageData[] = [];
 
-    // Procesa cada archivo seleccionado
-    fileArray.forEach((file, index) => {
+    // Procesa cada archivo seleccionado de forma asíncrona
+    for (const [index, file] of fileArray.entries()) {
       // Solo procesa archivos que sean imágenes
       if (file.type.startsWith('image/')) {
-        // Crea ID único basado en timestamp actual + índice
-        const imageId = Date.now() + index;
-        // Crea URL temporal para preview en el navegador (blob://...)
-        const imageUrl = URL.createObjectURL(file);
-        
-        // Agrega la imagen procesada al array temporal
-        newImages.push({
-          id: imageId,           // ID único para identificar la imagen
-          file: file,            // Archivo original
-          url: imageUrl,         // URL temporal para mostrar preview
-          name: file.name        // Nombre original del archivo
-        });
+        try {
+          // Comprimir y optimizar imagen
+          const optimizedFile = await compressAndResizeImage(file);
+          
+          // Crea ID único basado en timestamp actual + índice
+          const imageId = Date.now() + index;
+          // Crea URL temporal para preview en el navegador (blob://...)
+          const imageUrl = URL.createObjectURL(optimizedFile);
+          
+          // Agrega la imagen procesada al array temporal
+          newImages.push({
+            id: imageId,           // ID único para identificar la imagen
+            file: optimizedFile,   // Archivo optimizado
+            url: imageUrl,         // URL temporal para mostrar preview
+            name: file.name        // Nombre original del archivo
+          });
+        } catch (error) {
+          console.warn('Error optimizing image:', file.name, error);
+          // Fallback: usar archivo original
+          const imageId = Date.now() + index;
+          const imageUrl = URL.createObjectURL(file);
+          
+          newImages.push({
+            id: imageId,
+            file: file,
+            url: imageUrl,
+            name: file.name
+          });
+        }
       }
-    });
+    }
 
     // Agrega las nuevas imágenes al array existente (permite acumulación)
     setSelectedImages(prev => [...prev, ...newImages]);

@@ -31,7 +31,6 @@ function App() {
   // Controla si se muestra la abeja al completar
   const [showBeeSuccess, setShowBeeSuccess] = useState(false)
   // Estados temporales para debugging de recuadros
-  const [debugMode, setDebugMode] = useState(false)
   const [forceShowCarga, setForceShowCarga] = useState(false)
   const [forceShowAbeja, setForceShowAbeja] = useState(false)
   

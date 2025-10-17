@@ -8,7 +8,8 @@ import { useInstagramUpload } from './hooks/useInstagramUpload'
 // Componentes de animaciones
 import { FlowerSwarm } from './components/FlyingFlowers'    // Flores volando por pantalla
 import { VineHangingButton } from './components/VineHangingButton'  // Nuevo botón con liana
-import { BeeToHiveLoading } from './components/BeeToHiveLoading' // Loading con abejas
+// Importar imagen de la abeja
+import abejaSaludando from './assets/IMAGES/ABEJASALUDANDO.png'
 // Estilos CSS del componente
 import './App.css'
 
@@ -27,6 +28,12 @@ function App() {
   const [showMenu, setShowMenu] = useState(false)
   // Controla el modal de imagen ampliada
   const [selectedImageModal, setSelectedImageModal] = useState<string | null>(null)
+  // Controla si se muestra la abeja al completar
+  const [showBeeSuccess, setShowBeeSuccess] = useState(false)
+  // Estados temporales para debugging de recuadros
+  const [debugMode, setDebugMode] = useState(false)
+  const [forceShowCarga, setForceShowCarga] = useState(false)
+  const [forceShowAbeja, setForceShowAbeja] = useState(false)
   
   // ========================================
   // EFECTO DE SECUENCIA DE ANIMACIONES
@@ -121,14 +128,21 @@ function App() {
           console.log(`${result.errorCount} fotos tuvieron problemas`)
         }
         
-        // Auto-limpiar después de 3 segundos para volver al estado inicial
+        // Mostrar la abeja por 3 segundos
+        setShowBeeSuccess(true)
         setTimeout(() => {
+          setShowBeeSuccess(false)
           clearAllImages()
         }, 3000)
       }
     } catch (error: any) {
       // Maneja errores generales del proceso de publicación
       console.error('Error al publicar:', error.message)
+      // También limpiar en caso de error después de 3 segundos
+      setTimeout(() => {
+        setShowBeeSuccess(false)
+        clearAllImages()
+      }, 3000)
     }
   }, [publishToInstagram, clearAllImages])
 
@@ -162,6 +176,7 @@ function App() {
   // ========================================
   // RENDERIZADO DEL COMPONENTE
   // ========================================
+  
   return (
     <>
       {/* ========================================
@@ -175,7 +190,7 @@ function App() {
       {/* Componente que muestra flores cayendo como hojas naturales
           Solo se muestran cuando no hay procesos intensivos para optimizar rendimiento */}
       {!showModal && !showAnimation && !showLoading && (
-        <FlowerSwarm count={12} />
+        <FlowerSwarm count={11} />
       )}
       
       {/* ========================================
@@ -205,6 +220,11 @@ function App() {
               ======================================== */}
           <div className="seccion-bienvenida">
             <div className="tarjeta-bienvenida">
+              {/* Hojas específicas para tarjeta bienvenida */}
+              <div className="hojas-tarjeta-bienvenida"></div>
+              {/* Hojas del lado contrario */}
+              <div className="hojas-tarjeta-bienvenida-contrario"></div>
+              
               {/* Icono de cámara animado */}
               <i className="fas fa-camera icono-camara"></i>
               {/* Título de la tarjeta */}
@@ -289,6 +309,11 @@ function App() {
                 ======================================== */}
             <div className="vista-previa-fotos" style={{display: showPreview ? 'block' : 'none'}}>
               <div className="contenedor-vista-previa">
+                {/* Hojas específicas para vista previa */}
+                <div className="hojas-vista-previa"></div>
+                {/* Hojas del lado contrario */}
+                <div className="hojas-vista-previa-contrario"></div>
+                
                 {/* Título de la sección con contador de fotos */}
                 <h3 className="titulo-galeria">
                   <i className="fas fa-images"></i>
@@ -324,80 +349,114 @@ function App() {
                     ACCIONES DE VISTA PREVIA
                     Botones para agregar más fotos o publicar las seleccionadas
                     ======================================== */}
-                <div className="acciones-vista-previa" style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  {/* Botón para tomar otra foto */}
-                  <VineHangingButton
-                    onClick={handleCameraClick}      // Activa cámara para agregar más fotos
-                    delay={0}                        // Sin retraso
-                  >
-                    <i className="fas fa-camera" style={{ marginRight: '5px' }}></i>
-                    Tomar foto
-                  </VineHangingButton>
-                  {/* Botón para agregar más desde galería */}
-                  <VineHangingButton
-                    onClick={handleGalleryClick}     // Activa galería para agregar más fotos
-                    delay={0.2}                      // Retraso pequeño para efecto escalonado
-                  >
-                    <i className="fas fa-images" style={{ marginRight: '5px' }}></i>
-                    Galería
-                  </VineHangingButton>
-                  {/* Botón principal de publicar - se deshabilita si no hay fotos */}
-                  <VineHangingButton
-                    onClick={handlePublish}              // Inicia el proceso de publicación
-                    disabled={selectedImages.length === 0}  // Deshabilitado si no hay fotos
-                    delay={0.4}                          // Mayor retraso para destacar
-                    className="bounce-top"               // Animación bounce-top especial
-                  >
-                    <i className="fas fa-share" style={{ marginRight: '5px' }}></i>
-                    Publicar fotos
-                  </VineHangingButton>
+                <div className="acciones-vista-previa">
+                  {/* Contenedor para botones de tomar foto y galería (lado a lado) */}
+                  <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginBottom: '15px' }}>
+                    {/* Botón para tomar otra foto */}
+                    <VineHangingButton
+                      onClick={handleCameraClick}      // Activa cámara para agregar más fotos
+                      delay={0}                        // Sin retraso
+                    >
+                      <i className="fas fa-camera" style={{ marginRight: '5px' }}></i>
+                      Tomar foto
+                    </VineHangingButton>
+                    {/* Botón para agregar más desde galería */}
+                    <VineHangingButton
+                      onClick={handleGalleryClick}     // Activa galería para agregar más fotos
+                      delay={0.2}                      // Retraso pequeño para efecto escalonado
+                    >
+                      <i className="fas fa-images" style={{ marginRight: '5px' }}></i>
+                      Galería
+                    </VineHangingButton>
+                  </div>
+                  
+                  {/* Botón de publicar abajo (centrado) */}
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <VineHangingButton
+                      onClick={handlePublish}              // Inicia el proceso de publicación
+                      disabled={selectedImages.length === 0}  // Deshabilitado si no hay fotos
+                      delay={0.4}                          // Mayor retraso para destacar
+                      className="bounce-top"               // Animación bounce-top especial
+                    >
+                      <i className="fas fa-share" style={{ marginRight: '5px' }}></i>
+                      Publicar fotos
+                    </VineHangingButton>
+                  </div>
+                  
+                  {/* Botón temporal para debugging */}
+                  <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                    <button 
+                      onClick={() => setForceShowCarga(true)}
+                      style={{ padding: '8px 15px', backgroundColor: '#2196F3', color: 'white', border: 'none', borderRadius: '5px', fontSize: '12px' }}
+                    >
+                      🐛 Debug: Ver Carga
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* ========================================
-                SECCIÓN DE CARGA - ANIMACIÓN MIENTRAS SUBE A INSTAGRAM
+                SECCIÓN DE CARGA - ANIMACIÓN HONEYCOMB SIMPLIFICADA
                 Se muestra solo cuando está subiendo (showLoading = true)
                 ======================================== */}
-            <div className="seccion-carga" style={{display: showLoading ? 'block' : 'none'}}>
-              {/* Componente animado con abejas volando hacia la colmena */}
-              <BeeToHiveLoading
-                message={uploadProgress.message}        // Mensaje actual del proceso
-                currentStep={uploadProgress.currentImage}  // Foto actual que se está procesando
-                totalSteps={uploadProgress.totalImages}      // Total de fotos a procesar
-                progress={uploadProgress.totalImages > 0 ? (uploadProgress.currentImage / uploadProgress.totalImages) * 100 : 0}  // Porcentaje de progreso
-              />
-            </div>
-
-            {/* ========================================
-                SECCIÓN DE ÉXITO - CONFIRMACIÓN DE PUBLICACIÓN
-                Se muestra cuando la subida se completó exitosamente
-                ======================================== */}
-            <div className="seccion-exito" style={{display: showSuccess ? 'block' : 'none'}}>
-              <div className="tarjeta-exito">
-                {/* Icono de check verde animado */}
-                <i className="fas fa-check-circle"></i>
-                {/* Título de éxito */}
-                <h3>¡Fotos publicadas en Instagram!</h3>
-                {/* Mensaje de confirmación con enlace al perfil */}
-                <p>Tus fotos han sido publicadas automáticamente en nuestro perfil de Instagram. ¡Gracias por compartir este momento especial!</p>
-                {/* Botones de acción post-publicación */}
-                <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '20px' }}>
-                  {/* Enlace directo al perfil de Instagram */}
-                  <a href="https://instagram.com/baby_shower_daella" target="_blank" className="boton-instagram">
-                    <i className="fab fa-instagram"></i>
-                    Ver en Instagram
-                  </a>
-                  {/* Botón para limpiar todo y subir más fotos */}
-                  <VineHangingButton
-                    onClick={clearAllImages}        // Limpia todas las fotos y reinicia el proceso
-                    hangingIntensity="medium"       // Balanceo medio
-                    delay={0.5}                     // Retraso para secuencia
-                  >
-                    <i className="fas fa-plus" style={{ marginRight: '8px' }}></i>
-                    Subir más fotos
-                  </VineHangingButton>
+            <div className="seccion-carga" style={{display: showLoading || showBeeSuccess || forceShowCarga || forceShowAbeja ? 'block' : 'none'}}>
+              {/* Hojas específicas para sección de carga */}
+              <div className="hojas-seccion-carga"></div>
+              {/* Hojas del lado contrario */}
+              <div className="hojas-seccion-carga-contrario"></div>
+              
+              {/* Botones temporales para debugging */}
+              {(forceShowCarga || forceShowAbeja) && (
+                <div style={{position: 'absolute', top: '10px', right: '10px', zIndex: 999}}>
+                  {forceShowCarga && (
+                    <button 
+                      onClick={() => {setForceShowCarga(false); setForceShowAbeja(true)}}
+                      style={{marginRight: '10px', padding: '5px 10px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px'}}
+                    >
+                      Ir a Abeja
+                    </button>
+                  )}
+                  {forceShowAbeja && (
+                    <button 
+                      onClick={() => {setForceShowAbeja(false); setForceShowCarga(false)}}
+                      style={{padding: '5px 10px', backgroundColor: '#f44336', color: 'white', border: 'none', borderRadius: '5px'}}
+                    >
+                      Volver al inicio
+                    </button>
+                  )}
                 </div>
+              )}
+              
+              {/* Nuevo diseño simple con animación honeycomb */}
+              <div className="carga-honeycomb-container">
+                {(showBeeSuccess || forceShowAbeja) ? (
+                  // Estado final: Abeja saludando
+                  <>
+                    <div className="abeja-saludando">
+                      <img 
+                        src={abejaSaludando}
+                        alt="Abeja saludando" 
+                        className="abeja-volando"
+                      />
+                    </div>
+                    <div className="mensaje-carga">¡LISTO!</div>
+                  </>
+                ) : (
+                  // Estado de carga: Honeycomb
+                  <>
+                    <div className="honeycomb">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <div className="mensaje-carga">¡EN CAMINO!</div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -430,6 +489,11 @@ function App() {
       {showModal && (
         <div id="modalBienvenida" className="modal-bienvenida">
           <div className="contenido-modal-bienvenida">
+            {/* Marco específico de hojas para modal festejar */}
+            <div className="hojas-modal-festejar"></div>
+            {/* Hojas del lado contrario */}
+            <div className="hojas-modal-festejar-contrario"></div>
+            
             {/* Encabezado del modal con iconos animados */}
             <div className="encabezado-modal-bienvenida">
               <i className="fas fa-heart"></i>  {/* Corazón animado */}

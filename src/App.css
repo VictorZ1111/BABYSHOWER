@@ -370,6 +370,7 @@ body {
     transition: all 0.3s ease;             /* Transiciones suaves para hover */
     max-width: 700px;                       /* Ancho máximo para desktop */
     margin: 0 auto 30px auto;              /* Centrado automático con margen */
+    position: relative;                    /* Para posicionar hojas decorativas */
 }
 
 /**
@@ -570,6 +571,7 @@ body {
     border: 2px solid rgba(248, 187, 217, 0.4);
     max-width: 800px;                      /* Ancho máximo para desktop */
     margin: 0 auto;                        /* Centrado automático */
+    position: relative;                    /* Para posicionar hojas decorativas */
 }
 
 /* Mejoras para desktop en vista previa */
@@ -894,6 +896,7 @@ body {
     backdrop-filter: blur(10px);
     margin: 20px auto;
     max-width: 600px;                      /* Ancho máximo para desktop */
+    position: relative;                    /* Para posicionar hojas decorativas */
 }
 
 .spinner-carga {
@@ -1084,6 +1087,7 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
+    position: relative;                    /* Para posicionar hojas decorativas */
 }
 
 /* Mejoras del modal para desktop */
@@ -1805,3 +1809,418 @@ body {
     transform: rotate(0) scale(1.1);
   }
 }
+
+/* ========================================
+   ANIMACIÓN HONEYCOMB - NUEVA PANTALLA DE CARGA
+   ======================================== */
+
+/* Contenedor principal de la carga honeycomb - SIN recuadro de fondo */
+.carga-honeycomb-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 1cm;
+  /* Eliminado: fondo, border-radius, margin, box-shadow, backdrop-filter */
+}
+
+/* Animación honeycomb */
+@-webkit-keyframes honeycomb {
+  0%, 20%, 80%, 100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  30%, 70% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes honeycomb {
+  0%, 20%, 80%, 100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  30%, 70% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/* Animaciones para la abeja */
+@keyframes volar-arriba-abajo {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  50% { 
+    transform: translateY(-12px) scale(1.02);
+  }
+}
+
+@keyframes saludar-mano {
+  0%, 100% { 
+    transform: rotate(0deg);
+  }
+  15% { 
+    transform: rotate(-5deg);
+  }
+  30% { 
+    transform: rotate(5deg);
+  }
+  45% { 
+    transform: rotate(-3deg);
+  }
+  60% { 
+    transform: rotate(3deg);
+  }
+  75% { 
+    transform: rotate(-2deg);
+  }
+  85% { 
+    transform: rotate(1deg);
+  }
+}
+
+.honeycomb {
+  height: 32px;  /* Tamaño mediano más adecuado */
+  position: relative;
+  width: 32px;
+  margin: 20px auto;
+}
+
+.honeycomb div {
+  -webkit-animation: honeycomb 2.1s infinite backwards;
+  animation: honeycomb 2.1s infinite backwards;
+  background: #ff8c00;  /* Naranja fuerte como la miel */
+  height: 16px;  /* Tamaño mediano */
+  margin-top: 8px;  /* Proporcionalmente ajustado */
+  position: absolute;
+  width: 32px;  /* Tamaño mediano */
+  border-radius: 2px;  /* Bordes suavizados proporcionalmente */
+}
+
+.honeycomb div:after, .honeycomb div:before {
+  content: '';
+  border-left: 16px solid transparent;  /* Tamaño mediano */
+  border-right: 16px solid transparent;  /* Tamaño mediano */
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.honeycomb div:after {
+  top: -8px;  /* Tamaño mediano */
+  border-bottom: 8px solid #ff8c00;  /* Tamaño mediano */
+}
+
+.honeycomb div:before {
+  bottom: -8px;  /* Tamaño mediano */
+  border-top: 8px solid #ff8c00;  /* Tamaño mediano */
+}
+
+.honeycomb div:nth-child(1) {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  left: -37px;  /* Tamaño mediano proporcional */
+  top: 0;
+}
+
+.honeycomb div:nth-child(2) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+  left: -18px;  /* Tamaño mediano proporcional */
+  top: 29px;  /* Tamaño mediano proporcional */
+}
+
+.honeycomb div:nth-child(3) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+  left: 18px;  /* Tamaño mediano proporcional */
+  top: 29px;  /* Tamaño mediano proporcional */
+}
+
+.honeycomb div:nth-child(4) {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+  left: 37px;  /* Tamaño mediano proporcional */
+  top: 0;
+}
+
+.honeycomb div:nth-child(5) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+  left: 18px;  /* Tamaño mediano proporcional */
+  top: -29px;  /* Tamaño mediano proporcional */
+}
+
+.honeycomb div:nth-child(6) {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  left: -18px;  /* Tamaño mediano proporcional */
+  top: -29px;  /* Tamaño mediano proporcional */
+}
+
+.honeycomb div:nth-child(7) {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  left: 0;
+  top: 0;
+}
+
+/* Abeja saludando */
+.abeja-saludando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.abeja-volando {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+  animation: volar-arriba-abajo 2.5s ease-in-out infinite, saludar-mano 3s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Mensaje de carga */
+.mensaje-carga {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #ff8c00;  /* Naranja fuerte como la miel */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse-mensaje 2s ease-in-out infinite;
+}
+
+/* Animación para el mensaje */
+@keyframes pulse-mensaje {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* ========================================
+   DECORACIÓN DE HOJAS EN ESQUINAS - CON ANIMACIÓN DE VIENTO
+   ======================================== */
+/* HOJAS ESPECÍFICAS PARA CADA RECUADRO - DISEÑO RESPONSIVO */
+
+/* 1. Tarjeta de bienvenida inicial */
+.hojas-tarjeta-bienvenida {
+  position: absolute;
+  top: -14%;
+  left: -7.3%;
+  width: 95%;
+  height: 95%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* 2. Modal "A FESTEJAR" */
+.hojas-modal-festejar {
+  position: absolute;
+  top: -7.5%;
+  left: -7.5%;
+  width: 100%;
+  height: 50%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* 3. Sección de carga y abeja */
+.hojas-seccion-carga {
+  position: absolute;
+  top: -15%;
+  left: -7.5%;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* 4. Contenedor de vista previa de fotos */
+.hojas-vista-previa {
+  position: absolute;
+  top: -10%;
+  left: -7.5%;
+  width: 100%;
+  height: 70%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA HOJAS DECORATIVAS
+   ======================================== */
+
+/* TABLETS (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hojas-tarjeta-bienvenida {
+    top: -3.5%;
+    left: -3.5%;
+    width: 107%;
+    height: 107%;
+  }
+  
+  .hojas-modal-festejar {
+    top: -4.5%;
+    left: -4.5%;
+    width: 109%;
+    height: 109%;
+  }
+  
+  .hojas-seccion-carga {
+    top: -5.5%;
+    left: -5.5%;
+    width: 111%;
+    height: 111%;
+  }
+  
+  .hojas-vista-previa {
+    top: -3%;
+    left: -3%;
+    width: 106%;
+    height: 106%;
+  }
+}
+
+/* DESKTOP (más de 1024px) */
+@media (min-width: 1025px) {
+  .hojas-tarjeta-bienvenida {
+    top: -4%;
+    left: -4%;
+    width: 108%;
+    height: 108%;
+  }
+  
+  .hojas-modal-festejar {
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+  }
+  
+  .hojas-seccion-carga {
+    top: -6%;
+    left: -6%;
+    width: 112%;
+    height: 112%;
+  }
+  
+  .hojas-vista-previa {
+    top: -3.5%;
+    left: -3.5%;
+    width: 107%;
+    height: 107%;
+  }
+}
+
+/* ========================================
+   HOJAS DEL LADO CONTRARIO PARA CADA RECUADRO
+   ======================================== */
+
+/* Hojas lado contrario - Tarjeta bienvenida */
+.hojas-tarjeta-bienvenida-contrario {
+  position: absolute;
+  bottom: -12%;
+  right: -6%;
+  width: 80%;
+  height: 80%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+  transform: rotate(180deg);
+}
+
+/* Hojas lado contrario - Modal festejar */
+.hojas-modal-festejar-contrario {
+  position: absolute;
+  bottom: -7.5%;
+  right: -7.5%;
+  width: 100%;
+  height: 50%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+  transform: rotate(180deg);
+}
+
+/* Hojas lado contrario - Sección carga */
+.hojas-seccion-carga-contrario {
+  position: absolute;
+  bottom: -15%;
+  right: -7.5%;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+  transform: rotate(180deg);
+}
+
+/* Hojas lado contrario - Vista previa */
+.hojas-vista-previa-contrario {
+  position: absolute;
+  bottom: -10%;
+  right: -7.5%;
+  width: 100%;
+  height: 70%;
+  background-image: url('./assets/IMAGES/HOJAS3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+  transform: rotate(180deg);
+}
+
+

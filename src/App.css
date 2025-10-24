@@ -190,11 +190,16 @@ body {
 
 .honey-header-decoration {
     position: absolute;
+    top: -30px;    /* ← AQUÍ CAMBIAS LA POSICIÓN VERTICAL - más arriba */
+    left: 0;
     width: 100%;
-    height: 300px;
-    background: url('./assets/IMAGES/MIEL.png');
-    background-size: 50% 127% ;
+    height: 120px;
+    background: url('./assets/IMAGES/encabezado.png');
+    background-size: cover;  /* UNA imagen grande que cubra todo el ancho */
+    background-position: center top;  /* Centrada arriba */
+    background-repeat: no-repeat;  /* NO se repite */
     z-index: 1;
+    pointer-events: none;  /* No interfiere con clics */
 }
 
 /**
@@ -976,7 +981,7 @@ body {
 /* Footer */
 .pie-pagina {
     text-align: center;
-    padding: 20px 0 40px 0;                /* Más padding inferior */
+    padding: 0px 0 40px 0;                /* Más padding inferior */
     animation: fadeInUp 0.8s ease-out 0.6s both;
     max-width: 600px;                      /* Ancho máximo para desktop */
     margin: 30px auto;                     /* Margen superior para separación */
@@ -985,7 +990,7 @@ body {
 /* Mejoras para desktop en footer */
 @media (min-width: 768px) {
     .pie-pagina {
-        padding: 30px 0;                   /* Más padding en desktop */
+        padding: 10px 0;                   /* Más padding en desktop */
     }
 }
 
@@ -1525,13 +1530,6 @@ body {
         transform: translateZ(0); /* Hardware acceleration */
     }
 
-    /* Optimizar abejas para móvil */
-    .bee {
-        animation-duration: 8s !important; /* Más lento = menos lag */
-        will-change: transform;
-        transform: translateZ(0);
-    }
-
     /* Reducir partículas en móvil */
     .particula {
         display: none !important; /* Ocultar partículas en móvil */
@@ -2017,11 +2015,288 @@ body {
 }
 
 /* ========================================
-   DECORACIÓN DE HOJAS EN ESQUINAS - CON ANIMACIÓN DE VIENTO
+   DECORACIÓN ACTUALIZADA - MIEL EN ESQUINAS Y PANAL
    ======================================== */
-/* HOJAS ESPECÍFICAS PARA CADA RECUADRO - DISEÑO RESPONSIVO */
 
-/* 1. Tarjeta de bienvenida inicial */
+/* NUEVOS ELEMENTOS DECORATIVOS - MIEL INDEPENDIENTE PARA CADA RECUADRO */
+
+/* Miel para tarjeta bienvenida "¡Captura un momento especial!" */
+.miel-tarjeta-bienvenida {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 200px;     /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  height: 100px;    /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 25px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Miel para modal "¡A festejar!" */
+.miel-modal-festejar {
+  position: absolute;
+  top: -6px;
+  left: -7px;
+  width: 330px;     /* ← TÚ CAMBIAS - Modal festejar */
+  height: 190px;     /* ← TÚ CAMBIAS - Modal festejar */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 45px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Miel para sección de carga de fotos */
+.miel-seccion-fotos {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 220px;     /* ← TÚ CAMBIAS - Sección fotos */
+  height: 110px;    /* ← TÚ CAMBIAS - Sección fotos */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 25px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Miel para vista previa de fotos */
+.miel-vista-previa {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 210px;     /* ← TÚ CAMBIAS - Vista previa */
+  height: 105px;    /* ← TÚ CAMBIAS - Vista previa */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 25px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Miel para modal "¡LISTO!" - proceso de publicación */
+.miel-modal-listo {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 170px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  height: 85px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 25px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Miel para animación de bienvenida "¡BIENVENIDA AITANA!" */
+.miel-animacion-bienvenida {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 250px;     /* ← TÚ CAMBIAS - Animación bienvenida */
+  height: 125px;    /* ← TÚ CAMBIAS - Animación bienvenida */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 25px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* Miel para modal de imagen ampliada */
+.miel-modal-imagen {
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  width: 180px;     /* ← TÚ CAMBIAS - Modal imagen */
+  height: 90px;     /* ← TÚ CAMBIAS - Modal imagen */
+  background-image: url('./assets/IMAGES/mielesquina1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  transform: scaleX(1);
+  border-radius: 15px 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* 2. Panal2 ESPECÍFICO para cada recuadro - TÚ controlas cada uno independiente */
+
+/* Panal para tarjeta bienvenida "¡Captura un momento especial!" */
+.panal-tarjeta-bienvenida {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 80px;      /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  height: 80px;     /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  background-image: url('./assets/IMAGES/panal2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Panal para modal "¡A festejar!" */
+.panal-modal-festejar {
+  position: absolute;
+  bottom: -23px;
+  right: -7px;
+  width: 60px;      /* ← TÚ CAMBIAS - Modal festejar */
+  height: 70px;     /* ← TÚ CAMBIAS - Modal festejar */
+  background-image: url('./assets/IMAGES/panal2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Panal para sección de carga de fotos */
+.panal-seccion-fotos {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 90px;      /* ← TÚ CAMBIAS - Sección fotos */
+  height: 90px;     /* ← TÚ CAMBIAS - Sección fotos */
+  background-image: url('./assets/IMAGES/panal2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Panal para vista previa de fotos */
+.panal-vista-previa {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 85px;      /* ← TÚ CAMBIAS - Vista previa */
+  height: 85px;     /* ← TÚ CAMBIAS - Vista previa */
+  background-image: url('./assets/IMAGES/panal2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Panal para modal "¡LISTO!" - proceso de publicación */
+.panal-modal-listo {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 75px;      /* ← TÚ CAMBIAS - Modal LISTO */
+  height: 75px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  background-image: url('./assets/IMAGES/panal2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* 3. Abeja saludando para modal galería - TAMAÑO CONTROLABLE POR EL USUARIO */
+.abeja-galeria {
+  position: absolute;
+  right: 30px;
+  top: 57%;
+  transform: translateY(-50%);
+  width: 50px;         /* TÚ controlas este valor */
+  height: 60px;        /* TÚ controlas este valor */
+  background-image: url('./assets/IMAGES/ABEJASALUDANDO.png');
+  background-size: 100% 100%;  /* Se ajusta EXACTAMENTE a tu width/height */
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 10;         /* Por encima de decorativos pero mantienes control */
+  opacity: 1;
+}
+
+/* 4. Abeja flor en esquina inferior IZQUIERDA - TÚ controlas el tamaño */
+.abeja-flor-principal {
+  position: absolute;        
+  bottom: -200px;             /* Esquina inferior */
+  left: -30px;               /* Esquina IZQUIERDA */
+  width: 300px;             /* ← TÚ CAMBIAS ESTE TAMAÑO */
+  height: 350px;            /* ← TÚ CAMBIAS ESTE TAMAÑO */
+  background-image: url('./assets/IMAGES/abejaflor.png');
+  background-size: 100% 100%; /* FUERZA el tamaño exacto que TÚ definas */
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 3;               /* Por detrás de recuadros (z-index: 5) */
+  opacity: 1;
+}
+
+
+
+/* Clase para abejacanasta grande en el centro */
+.abejacanasta-grande {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  background-image: url('./assets/IMAGES/abejacanasta.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+/* Clase para abejavolando1 en el encabezado */
+.abejavolando-encabezado {
+  width: 100px;
+  height: 80px;
+  background-image: url('./assets/IMAGES/abevolando1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+/* HOJAS COMENTADAS - REEMPLAZADAS POR NUEVOS ELEMENTOS */
+/*
 .hojas-tarjeta-bienvenida {
   position: absolute;
   top: -14%;
@@ -2037,7 +2312,6 @@ body {
   opacity: 0.8;
 }
 
-/* 2. Modal "A FESTEJAR" */
 .hojas-modal-festejar {
   position: absolute;
   top: -7.5%;
@@ -2053,7 +2327,6 @@ body {
   opacity: 0.8;
 }
 
-/* 3. Sección de carga y abeja */
 .hojas-seccion-carga {
   position: absolute;
   top: -15%;
@@ -2069,7 +2342,6 @@ body {
   opacity: 0.8;
 }
 
-/* 4. Contenedor de vista previa de fotos */
 .hojas-vista-previa {
   position: absolute;
   top: -10%;
@@ -2084,6 +2356,7 @@ body {
   z-index: -1;
   opacity: 0.8;
 }
+*/
 
 /* ========================================
    DISEÑO RESPONSIVO PARA HOJAS DECORATIVAS
@@ -2206,21 +2479,6 @@ body {
   transform: rotate(180deg);
 }
 
-/* Hojas lado contrario - Vista previa */
-.hojas-vista-previa-contrario {
-  position: absolute;
-  bottom: -10%;
-  right: -7.5%;
-  width: 100%;
-  height: 70%;
-  background-image: url('./assets/IMAGES/HOJAS3.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.8;
-  transform: rotate(180deg);
-}
-
-
+/* ========================================
+   MEDIA QUERIES ELIMINADOS - AHORA TÚ TIENES CONTROL TOTAL
+   ======================================== */

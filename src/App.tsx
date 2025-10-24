@@ -10,6 +10,8 @@ import { FlowerSwarm } from './components/FlyingFlowers'    // Flores volando po
 import { VineHangingButton } from './components/VineHangingButton'  // Nuevo botón con liana
 // Importar imagen de la abeja
 import abejaSaludando from './assets/IMAGES/ABEJASALUDANDO.png'
+// Otras imágenes se cargan desde CSS:
+// background1.png, mielesquina1.png, panal2.png, abejaflor.png
 // Estilos CSS del componente
 import './App.css'
 
@@ -200,14 +202,11 @@ function App() {
             ENCABEZADO - TÍTULO Y SUBTÍTULO
             ======================================== */}
         <header className="encabezado">
-          {/* Título principal con iconos de bebé y corazón */}
-          <h1 className="titulo">
-            <i className="fas fa-baby"></i>
-            ¡Bienvenida Aitana!
-            <i className="fas fa-heart"></i>
-          </h1>
+          {/* Imagen abejavolando1 como encabezado */}
+          <div className="abejavolando-encabezado"></div>
           {/* Subtítulo explicativo */}
-          <p className="subtitulo">¡Comparte los momentos especiales de este día!</p>
+          <br></br>
+          <br></br>
         </header>
 
         {/* ========================================
@@ -219,10 +218,10 @@ function App() {
               ======================================== */}
           <div className="seccion-bienvenida">
             <div className="tarjeta-bienvenida">
-              {/* Hojas específicas para tarjeta bienvenida */}
-              <div className="hojas-tarjeta-bienvenida"></div>
-              {/* Hojas del lado contrario */}
-              <div className="hojas-tarjeta-bienvenida-contrario"></div>
+              {/* Miel específica para tarjeta bienvenida */}
+              <div className="miel-tarjeta-bienvenida"></div>
+              {/* Panal2 en esquina inferior derecha - RECUADRO 1 */}
+              <div className="panal-tarjeta-bienvenida"></div>
               
               {/* Icono de cámara animado */}
               <i className="fas fa-camera icono-camara"></i>
@@ -308,10 +307,10 @@ function App() {
                 ======================================== */}
             <div className="vista-previa-fotos" style={{display: showPreview ? 'block' : 'none'}}>
               <div className="contenedor-vista-previa">
-                {/* Hojas específicas para vista previa */}
-                <div className="hojas-vista-previa"></div>
-                {/* Hojas del lado contrario */}
-                <div className="hojas-vista-previa-contrario"></div>
+                {/* Miel específica para vista previa */}
+                <div className="miel-vista-previa"></div>
+                {/* Panal2 en esquina inferior derecha - RECUADRO 4 */}
+                <div className="panal-vista-previa"></div>
                 
                 {/* Título de la sección con contador de fotos */}
                 <h3 className="titulo-galeria">
@@ -400,10 +399,8 @@ function App() {
                 Se muestra solo cuando está subiendo (showLoading = true)
                 ======================================== */}
             <div className="seccion-carga" style={{display: showLoading || showBeeSuccess || forceShowCarga || forceShowAbeja ? 'block' : 'none'}}>
-              {/* Hojas específicas para sección de carga */}
-              <div className="hojas-seccion-carga"></div>
-              {/* Hojas del lado contrario */}
-              <div className="hojas-seccion-carga-contrario"></div>
+              {/* SOLO mielesquina1 en esquina superior izquierda */}
+              <div className="miel-esquina-superior"></div>
               
               {/* Botones temporales para debugging */}
               {(forceShowCarga || forceShowAbeja) && (
@@ -429,6 +426,11 @@ function App() {
               
               {/* Nuevo diseño simple con animación honeycomb */}
               <div className="carga-honeycomb-container">
+                {/* Miel específica para modal LISTO */}
+                <div className="miel-modal-listo"></div>
+                {/* Panal2 en esquina inferior derecha - RECUADRO 5 MODAL LISTO */}
+                <div className="panal-modal-listo"></div>
+                
                 {(showBeeSuccess || forceShowAbeja) ? (
                   // Estado final: Abeja saludando
                   <>
@@ -488,16 +490,16 @@ function App() {
       {showModal && (
         <div id="modalBienvenida" className="modal-bienvenida">
           <div className="contenido-modal-bienvenida">
-            {/* Marco específico de hojas para modal festejar */}
-            <div className="hojas-modal-festejar"></div>
-            {/* Hojas del lado contrario */}
-            <div className="hojas-modal-festejar-contrario"></div>
+            {/* Miel específica para modal festejar */}
+            <div className="miel-modal-festejar"></div>
+            {/* Panal2 en esquina inferior derecha - RECUADRO 2 */}
+            <div className="panal-modal-festejar"></div>
             
             {/* Encabezado del modal con iconos animados */}
             <div className="encabezado-modal-bienvenida">
-              <i className="fas fa-heart"></i>  {/* Corazón animado */}
+              
               <h2>¡Bienvenidos a mi baby shower!</h2>
-              <i className="fas fa-baby"></i>   {/* Bebé animado */}
+             
             </div>
             {/* Cuerpo del modal con información */}
             <div className="cuerpo-modal-bienvenida">
@@ -506,16 +508,20 @@ function App() {
               {/* Lista de características/funciones disponibles */}
               <div className="caracteristicas-bienvenida">
                 <div className="caracteristica">
-                  <i className="fas fa-camera"></i>
+                  
                   <span>Toma fotos con tu cámara</span>
+                  <i className="fas fa-camera"></i>
                 </div>
                 <div className="caracteristica">
                   <i className="fas fa-images"></i>
                   <span>Sube desde tu galería</span>
+                  {/* Abeja saludando a la derecha del texto */}
+                  <div className="abeja-galeria"></div>
                 </div>
                 <div className="caracteristica">
-                  <i className="fas fa-heart"></i>
+                  
                   <span>Comparte momentos especiales</span>
+                  <i className="fas fa-heart"></i>
                 </div>
               </div>
               {/* Botón principal con nuevo diseño SVG animado */}
@@ -584,6 +590,9 @@ function App() {
           ======================================== */}
       {showAnimation && (
         <div id="animacionBienvenida" className="animacion-bienvenida">
+          {/* Miel específica para animación bienvenida */}
+          <div className="miel-animacion-bienvenida"></div>
+          
           {/* Contenedor para las líneas de texto curvadas */}
           <div className="contenedor-arco">
             {/* ========================================
@@ -622,9 +631,7 @@ function App() {
           </div>
           {/* Iconos flotantes animados */}
           <div className="iconos-bebe">
-            <i className="fas fa-baby"></i>   {/* Bebé */}
-            <i className="fas fa-heart"></i>  {/* Corazón */}
-            <i className="fas fa-star"></i>   {/* Estrella */}
+            <div className="abejacanasta-grande"></div>   {/* Abejacanasta grande en el centro */}
           </div>
         </div>
       )}
@@ -635,6 +642,7 @@ function App() {
           ======================================== */}
       {selectedImageModal && (
         <div className="modal-imagen" onClick={handleCloseImageModal}>
+          <div className="miel-modal-imagen"></div>
           <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
             <button className="modal-cerrar" onClick={handleCloseImageModal}>
               <i className="fas fa-times"></i>
@@ -643,6 +651,9 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* Abeja flor en esquina inferior izquierda principal */}
+      <div className="abeja-flor-principal"></div>
     </>
   )
 }

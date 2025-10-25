@@ -67,13 +67,20 @@ export const FlyingFlower = ({
    * con movimiento zigzag y balanceo desde arriba hacia abajo.
    */
   const generateFlowerPath = () => {
-    // Dividir la pantalla en 5 zonas para mejor distribución: muy izquierda, izquierda, centro, derecha, muy derecha
+    // Dividir la pantalla en 7 zonas específicas para distribución equitativa
     const zones = [
-      { start: -30, end: windowSize.width * 0.2 },          // Zona muy izquierda (incluye fuera de pantalla)
-      { start: windowSize.width * 0.2, end: windowSize.width * 0.4 },   // Zona izquierda
-      { start: windowSize.width * 0.4, end: windowSize.width * 0.6 },   // Zona centro
-      { start: windowSize.width * 0.6, end: windowSize.width * 0.8 },   // Zona derecha
-      { start: windowSize.width * 0.8, end: windowSize.width + 30 }     // Zona muy derecha (incluye fuera de pantalla)
+      // 3 ZONAS IZQUIERDA
+      { start: 0, end: windowSize.width * 0.15 },              // Zona extrema izquierda
+      { start: windowSize.width * 0.15, end: windowSize.width * 0.3 },   // Zona izquierda-media
+      { start: windowSize.width * 0.3, end: windowSize.width * 0.45 },   // Zona izquierda-centro
+      
+      // 1 ZONA CENTRO
+      { start: windowSize.width * 0.45, end: windowSize.width * 0.55 },  // Zona centro
+      
+      // 3 ZONAS DERECHA
+      { start: windowSize.width * 0.55, end: windowSize.width * 0.7 },   // Zona derecha-centro
+      { start: windowSize.width * 0.7, end: windowSize.width * 0.85 },   // Zona derecha-media
+      { start: windowSize.width * 0.85, end: windowSize.width }           // Zona extrema derecha
     ];
     
     // Seleccionar zona aleatoriamente para distribución equitativa

@@ -192,7 +192,6 @@ function App() {
   
   return (
     <>
-    <>
       {/* ========================================
           ENCABEZADO FIJO - DECORACIÓN DE MIEL
           ======================================== */}
@@ -204,7 +203,7 @@ function App() {
       {/* Componente que muestra flores cayendo como hojas naturales
           Solo se muestran cuando no hay procesos intensivos para optimizar rendimiento */}
       {!showModal && !showAnimation && !showLoading && (
-        <FlowerSwarm count={11} />
+        <FlowerSwarm count={7} />
       )}
       
       {/* ========================================
@@ -646,7 +645,6 @@ function App() {
 
       {/* Abeja flor en esquina inferior izquierda principal */}
       <div className="abeja-flor-principal"></div>
-    </>
     </>
   )
 }

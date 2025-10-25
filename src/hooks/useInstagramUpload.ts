@@ -407,15 +407,21 @@ export const useInstagramUpload = () => {
   
   // Función para crear contenedor de media en Instagram (Paso 1 de 2)
   // Esto prepara la imagen para publicación pero no la publica aún
-  const createInstagramMedia = async (imageUrl: string): Promise<string> => {
+  const createInstagramMedia = async (imageUrl: string, customCaption?: string): Promise<string> => {
     // URL del endpoint de creación de media de Instagram
     const url = `https://graph.facebook.com/${INSTAGRAM_CONFIG.API_VERSION}/${INSTAGRAM_CONFIG.INSTAGRAM_ACCOUNT_ID}/media`;
     
     // Prepara los datos para el POST
     const formData = new FormData();
     formData.append('image_url', imageUrl);  // URL pública de Cloudinary
-    // Caption personalizado para el baby shower con emojis y hashtags
-    formData.append('caption', '¡Momento especial del Baby Shower! 💕👶 #BabyShowerAitana #MomentosEspeciales');
+    
+    // Caption: si el usuario escribe, se publica su mensaje + slogan; si no, solo el slogan
+    const slogan = '#BabyShowerAitana 🐝';
+    const finalCaption = customCaption && customCaption.trim()
+      ? `${customCaption.trim()} ${slogan}`
+      : slogan;
+    
+    formData.append('caption', finalCaption);
     formData.append('access_token', INSTAGRAM_CONFIG.ACCESS_TOKEN);  // Token de acceso
     
     // Hace la petición a Instagram API
@@ -499,8 +505,9 @@ export const useInstagramUpload = () => {
    * 
    * @param imageData - Objeto con datos de la imagen (file, url, caption)
    * @param imageNumber - Número de imagen en la secuencia (para tracking)
+   * @param customCaption - Comentario personalizado del usuario (opcional)
    */
-  const publishSingleImage = async (imageData: ImageData, imageNumber: number): Promise<void> => {
+  const publishSingleImage = async (imageData: ImageData, imageNumber: number, customCaption?: string): Promise<void> => {
     try {
       // PASO 1: SUBIDA A CLOUDINARY
       // Actualiza UI para mostrar progreso de subida
@@ -519,8 +526,8 @@ export const useInstagramUpload = () => {
         message: `Preparando imagen ${imageNumber} para Instagram...`
       }));
       
-      // Crea contenedor de media en Instagram (aún no visible públicamente)
-      const mediaId = await createInstagramMedia(imageUrl);
+  // Crea contenedor de media en Instagram (aún no visible públicamente)
+  const mediaId = await createInstagramMedia(imageUrl, customCaption);
       
       // PASO 3: PUBLICACIÓN EN INSTAGRAM
       // Actualiza UI para mostrar progreso de publicación
@@ -563,15 +570,12 @@ export const useInstagramUpload = () => {
    * 
    * @returns Promise con objeto conteniendo contadores de éxito y error
    */
-  const publishToInstagram = useCallback(async (): Promise<{ successCount: number; errorCount: number }> => {
+  const publishToInstagram = useCallback(async (customCaption?: string): Promise<{ successCount: number; errorCount: number }> => {
     // VALIDACIÓN INICIAL
-    // Verifica que hay imágenes seleccionadas antes de proceder
     if (selectedImages.length === 0) {
       throw new Error('No hay fotos para publicar.');
     }
 
-    // INICIALIZACIÓN DEL ESTADO DE PROGRESO
-    // Configura el estado inicial para tracking del proceso
     setUploadProgress({
       currentImage: 0,
       totalImages: selectedImages.length,
@@ -580,70 +584,46 @@ export const useInstagramUpload = () => {
       isCompleted: false
     });
 
-    // CONTADORES PARA REPORTE FINAL
-    let successCount = 0;  // Cuenta imágenes publicadas exitosamente
-    let errorCount = 0;    // Cuenta imágenes que fallaron
-    
+    let successCount = 0;
+    let errorCount = 0;
     try {
-      // PROCESAMIENTO SECUENCIAL DE IMÁGENES
-      // Se procesan una por una para cumplir con rate limits de Instagram
       for (let i = 0; i < selectedImages.length; i++) {
         const image = selectedImages[i];
-        
         try {
-          // Actualiza progreso para mostrar imagen actual
           setUploadProgress(prev => ({
             ...prev,
             currentImage: i + 1,
             message: `Publicando imagen ${i + 1} de ${selectedImages.length}...`
           }));
-          
-          // Publica la imagen individual usando función auxiliar
-          await publishSingleImage(image, i + 1);
-          successCount++;  // Incrementa contador de éxitos
-          
-          // DELAY ENTRE PUBLICACIONES
-          // Evita rate limiting de Instagram API (excepto en la última imagen)
+          await publishSingleImage(image, i + 1, customCaption);
+          successCount++;
           if (i < selectedImages.length - 1) {
             setUploadProgress(prev => ({
               ...prev,
               message: `Imagen ${i + 1} publicada. Preparando siguiente...`
             }));
-            await delay(3000);  // 3 segundos entre publicaciones
+            await delay(3000);
           }
-          
         } catch (error: any) {
-          // MANEJO DE ERRORES INDIVIDUALES
-          // Los errores no detienen el proceso, solo se registran
           console.error(`Error en imagen ${i + 1}:`, error);
-          errorCount++;  // Incrementa contador de errores
-          
-          // Continúa con las siguientes imágenes tras un delay menor
+          errorCount++;
           if (i < selectedImages.length - 1) {
             setUploadProgress(prev => ({
               ...prev,
               message: `Error en imagen ${i + 1}. Continuando con la siguiente...`
             }));
-            await delay(2000);  // Delay menor para errores
+            await delay(2000);
           }
         }
       }
-
-      // FINALIZACIÓN EXITOSA
-      // Actualiza el estado para indicar completación del proceso
       setUploadProgress(prev => ({
         ...prev,
         isUploading: false,
         isCompleted: true,
         message: 'Publicación completada'
       }));
-
-      // Retorna estadísticas finales del proceso
       return { successCount, errorCount };
-
     } catch (error: any) {
-      // MANEJO DE ERRORES CRÍTICOS
-      // Errores que detienen todo el proceso
       setUploadProgress(prev => ({
         ...prev,
         isUploading: false,
@@ -652,7 +632,7 @@ export const useInstagramUpload = () => {
       }));
       throw error;
     }
-  }, [selectedImages]);  // Dependencia: se recrea cuando cambian las imágenes seleccionadas
+  }, [selectedImages]);
 
   /**
    * RETORNO DEL HOOK - API PÚBLICA

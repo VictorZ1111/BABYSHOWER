@@ -47,9 +47,7 @@ html {
   Twitter: @xsgames_
 ---------------------------------------------- */
 
-.bounce-top{
-    animation: bounce-top .9s linear both, swing-side 2s ease-in-out infinite 1s;
-} 
+/* .bounce-top eliminado - animaciones de balanceo y caída quitadas para botón "Publicar fotos" */ 
 
 @keyframes bounce-top {
     0% {
@@ -170,6 +168,66 @@ body {
     overscroll-behavior: none;                          /* Elimina completamente el overscroll */
     margin: 0;                                          /* Asegura que no hay márgenes */
     padding: 0;                                         /* Asegura que no hay padding */
+    position: relative;                                 /* Para posicionar las abejas absolutas */
+}
+
+/* Abejas de fondo esparcidas aleatoriamente */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+/* Imagen removida del body - va en el modal */
+
+body::before {
+    top: 15%;
+    left: 10%;
+    transform: rotate(-15deg);
+}
+
+body::after {
+    top: 70%;
+    right: 15%;
+    transform: rotate(25deg);
+}
+
+/* Abeja flor arriba en esquina inferior derecha del fondo */
+
+/* Contenedor para abejas adicionales */
+#root::before,
+#root::after {
+    content: '';
+    position: fixed;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 85px;
+    height: 85px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#root::before {
+    top: 35%;
+    left: 80%;
+    transform: rotate(45deg);
+}
+
+#root::after {
+    top: 55%;
+    left: 5%;
+    transform: rotate(-30deg);
 }
 
 /**
@@ -193,13 +251,40 @@ body {
     top: -30px;    /* ← AQUÍ CAMBIAS LA POSICIÓN VERTICAL - más arriba */
     left: 0;
     width: 100%;
-    height: 120px;
-    background: url('./assets/IMAGES/encabezado.png');
+    height: 170px;
+    background: url('./assets/IMAGES/mielofi.png');
     background-size: cover;  /* UNA imagen grande que cubra todo el ancho */
     background-position: center top;  /* Centrada arriba */
     background-repeat: no-repeat;  /* NO se repite */
     z-index: 1;
     pointer-events: none;  /* No interfiere con clics */
+    filter: sepia(30%) saturate(150%) hue-rotate(30deg) brightness(0.9) contrast(1.1); /* Color amarillo suave */
+}
+
+/* Abejas adicionales en el header */
+.honey-header-decoration::after,
+.honey-header-decoration::before {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+    opacity: 1;
+    z-index: 2;
+}
+
+.honey-header-decoration::after {
+    top: 60%;
+    right: 10%;
+    transform: rotate(-10deg);
+}
+
+.honey-header-decoration::before {
+    top: 30%;
+    left: 15%;
+    transform: rotate(20deg);
 }
 
 /**
@@ -222,6 +307,446 @@ body {
     position: relative;              /* Para posicionamiento de elementos hijos absolutos */
     box-sizing: border-box;          /* Include padding en el ancho total */
     z-index: 5;                      /* Por encima del encabezado de miel (z-index: 1) */
+}
+
+/* Abejas adicionales en el contenedor principal */
+.contenedor::before,
+.contenedor::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 80px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.contenedor::before {
+    top: 25%;
+    right: -20px;
+    transform: rotate(60deg);
+}
+
+.contenedor::after {
+    bottom: 15%;
+    left: -25px;
+    transform: rotate(-45deg);
+}
+
+/* Abejas adicionales de fondo estáticas */
+.encabezado::before,
+.encabezado::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.encabezado::before {
+    top: 20%;
+    right: 5%;
+    transform: rotate(15deg);
+}
+
+.encabezado::after {
+    top: 80%;
+    left: 2%;
+    transform: rotate(-20deg);
+}
+
+/* Abeja adicional en el pie de página */
+.pie-pagina::before {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 55px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+    top: -30%;
+    right: 10%;
+    transform: rotate(35deg);
+}
+
+/* Más abejas de fondo distribuidas por toda la pantalla */
+.seccion-bienvenida::before,
+.seccion-bienvenida::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.seccion-bienvenida::before {
+    top: 10%;
+    left: 85%;
+    transform: rotate(-25deg);
+}
+
+.seccion-bienvenida::after {
+    bottom: 20%;
+    right: 90%;
+    transform: rotate(40deg);
+}
+
+.seccion-fotos::before,
+.seccion-fotos::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 65px;
+    height: 65px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.seccion-fotos::before {
+    top: 15%;
+    left: -15%;
+    transform: rotate(70deg);
+}
+
+.seccion-fotos::after {
+    bottom: 30%;
+    right: -10%;
+    transform: rotate(-15deg);
+}
+
+.tarjeta-bienvenida::before,
+.tarjeta-bienvenida::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.tarjeta-bienvenida::before {
+    top: -15%;
+    right: 95%;
+    transform: rotate(55deg);
+}
+
+.tarjeta-bienvenida::after {
+    bottom: -10%;
+    left: 92%;
+    transform: rotate(-40deg);
+}
+
+.contenedor-vista-previa::before,
+.contenedor-vista-previa::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.contenedor-vista-previa::before {
+    top: 5%;
+    left: -8%;
+    transform: rotate(85deg);
+}
+
+.contenedor-vista-previa::after {
+    bottom: 8%;
+    right: -5%;
+    transform: rotate(-55deg);
+}
+
+/* Más abejas adicionales para llenar espacios */
+.titulo::before,
+.titulo::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.titulo::before {
+    top: -20%;
+    left: -5%;
+    transform: rotate(25deg);
+}
+
+.titulo::after {
+    top: 80%;
+    right: -3%;
+    transform: rotate(-60deg);
+}
+
+.contenido-principal::before,
+.contenido-principal::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.contenido-principal::before {
+    top: 40%;
+    left: 95%;
+    transform: rotate(120deg);
+}
+
+.contenido-principal::after {
+    bottom: 25%;
+    left: -20%;
+    transform: rotate(-80deg);
+}
+
+/* Abejas extra en los espacios laterales del viewport */
+body::before,
+body::after {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+/* Agregar más abejas usando el elemento html */
+html::before,
+html::after {
+    content: '';
+    position: fixed;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+    opacity: 1;
+    z-index: -2;
+    pointer-events: none;
+}
+
+html::before {
+    top: 25%;
+    right: 2%;
+    transform: rotate(45deg);
+}
+
+html::after {
+    bottom: 35%;
+    left: 1%;
+    transform: rotate(-25deg);
+}
+
+/* Más abejas específicamente para lado derecho, centro y abajo */
+.galeria-fotos::before,
+.galeria-fotos::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 55px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.galeria-fotos::before {
+    top: 20%;
+    right: -15%;
+    transform: rotate(30deg);
+}
+
+.galeria-fotos::after {
+    bottom: 10%;
+    right: -20%;
+    transform: rotate(-70deg);
+}
+
+.acciones-vista-previa::before,
+.acciones-vista-previa::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.acciones-vista-previa::before {
+    top: 50%;
+    right: -12%;
+    transform: rotate(90deg);
+}
+
+.acciones-vista-previa::after {
+    bottom: -20%;
+    left: 50%;
+    transform: rotate(-45deg);
+}
+
+/* Abejas adicionales para el centro de la pantalla */
+.subtitulo::before,
+.subtitulo::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.subtitulo::before {
+    top: 150%;
+    right: -10%;
+    transform: rotate(15deg);
+}
+
+.subtitulo::after {
+    bottom: -150%;
+    left: 95%;
+    transform: rotate(-35deg);
+}
+
+/* Más abejas para la zona inferior */
+.texto-pie::before,
+.texto-pie::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.texto-pie::before {
+    bottom: -80%;
+    right: -5%;
+    transform: rotate(60deg);
+}
+
+.texto-pie::after {
+    bottom: -50%;
+    left: -8%;
+    transform: rotate(-20deg);
+}
+
+/* Más abejas específicamente a la DERECHA en la zona inferior (donde está la abeja en la flor) */
+.pie-pagina::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 65px;
+    height: 65px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+    bottom: -60%;
+    right: 20%;
+    transform: rotate(45deg);
+}
+
+/* Abejas adicionales en la zona derecha inferior */
+.enlace-instagram::before,
+.enlace-instagram::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.enlace-instagram::before {
+    bottom: -80%;
+    right: -30%;
+    transform: rotate(75deg);
+}
+
+.enlace-instagram::after {
+    bottom: -120%;
+    right: 15%;
+    transform: rotate(-30deg);
+}
+
+/* Más abejas en la esquina derecha de la pantalla completa */
+.contenedor::before {
+    bottom: 5% !important;
+    right: 5% !important;
+    transform: rotate(120deg) !important;
+    width: 70px !important;
+    height: 70px !important;
+}
+
+/* Abeja adicional en zona derecha usando selector diferente */
+.boton-instagram-pie::before {
+    content: '';
+    position: fixed;
+    background-image: url('./assets/IMAGES/abejafondo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+    bottom: 8%;
+    right: 8%;
+    transform: rotate(-60deg);
 }
 
 /**
@@ -451,7 +976,7 @@ body {
  */
 .boton-subir-principal {
     padding: 20px 30px;                    /* Espaciado interno generoso */
-    background: linear-gradient(135deg, #e91e63, #ad1457); /* Gradiente rosa intenso */
+    background: linear-gradient(135deg, #f8f4a5, #f8f4a5); /* Gradiente rosa intenso */
     color: white;                          /* Texto blanco para contraste */
     border: none;                          /* Sin borde para diseño limpio */
     border-radius: 20px;                   /* Esquinas muy redondeadas */
@@ -463,7 +988,7 @@ body {
     align-items: center;                   /* Alineación vertical centrada */
     justify-content: center;               /* Centrado horizontal */
     gap: 12px;                            /* Espaciado entre texto e icono */
-    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4); /* Sombra rosa para profundidad */
+    box-shadow: 0 8px 25px #f8f4a5(233, 30, 99, 0.4); /* Sombra rosa para profundidad */
     font-family: 'Quicksand', sans-serif;  /* Fuente consistente */
     width: 100%;                          /* Ancho completo */
     max-width: 280px;                     /* Límite máximo para diseño limpio */
@@ -479,7 +1004,7 @@ body {
  */
 .boton-subir-principal:hover {
     transform: translateY(-3px);           /* Elevación sutil del botón */
-    box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5); /* Sombra más intensa y extendida */
+    box-shadow: 0 12px 35px #f8f4a5(233, 30, 99, 0.5); /* Sombra más intensa y extendida */
     animation: pulse 0.6s ease-in-out;     /* Animación de pulso al hacer hover */
 }
 
@@ -772,6 +1297,23 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+/* Abeja flor arriba en esquina inferior derecha del FONDO del modal de imagen */
+.modal-imagen::after {
+    content: '';
+    position: absolute;
+    bottom: -55px;
+    right: -70px;
+    width: 300px;
+    height: 300px;
+    background-image: url('./assets/IMAGES/abeflorarriba.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    z-index: 1;
+    pointer-events: none;
+}
+
 .modal-imagen img {
     width: 100%;
     height: auto;
@@ -1001,21 +1543,74 @@ body {
 .boton-instagram-pie {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: linear-gradient(45deg, #9e9e9e 0%, #757575 25%, #616161 50%, #424242 75%, #212121 100%);
-    color: white;
+    justify-content: center;
+    position: relative;
+    padding: 11px 20px;
+    background: #fded70ff;  /* Solo fondo amarillo, sin imagen duplicada */
+    color: rgb(255, 255, 255);  /* Letras en blanco */
     text-decoration: none;
     border-radius: 25px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.9em;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;  /* ← DEVUELTO para mantener imagen DENTRO del botón */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    z-index: 1;  /* ← TEXTO POR DELANTE */
 }
+
+/* Pseudo-elemento para rotar solo la imagen de fondo */
+.boton-instagram-pie::before {
+    content: '';
+    position: absolute;
+    top: 0;                         /* ← DENTRO DEL BOTÓN */
+    left: 0;                        /* ← DENTRO DEL BOTÓN */
+    right: 0;                       /* ← DENTRO DEL BOTÓN */
+    bottom: 0;                      /* ← DENTRO DEL BOTÓN */
+    background: url('./assets/IMAGES/instagramico.png') no-repeat;
+    background-position: 107% 20%;   /* ← PARA QUE SUBA: números MÁS ALTOS */
+    background-size: 70px 70px;     /* ← TAMAÑO MÁS PEQUEÑO PARA QUE QUEPA */
+    transform: rotate(15deg);       /* ← TÚ CAMBIAS LA ROTACIÓN AQUÍ: grados */
+    z-index: -1;                    /* ← IMAGEN DETRÁS DEL TEXTO */
+    pointer-events: none;
+}
+
+/* Clase duplicada eliminada - ya está definida arriba */
 
 .boton-instagram-pie:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 20px #fded70ff;  /* Sombra amarilla */
+    filter: brightness(1.1);  /* Brillo aumentado al hover */
+}
+
+/* ========================================
+   DECORACIONES PARA BOTON-INSTAGRAM-PIE - COMO ESTABA ORIGINALMENTE
+   ======================================== */
+
+.enlace-instagram {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.boton-instagram-pie {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: #fded70ff; 
+  color: #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.boton-instagram-pie:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .texto-pie {
@@ -1149,16 +1744,235 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 15px;
-    background: rgba(233, 30, 99, 0.1);
+    padding: 12px 15px 12px 30px; /* Padding izquierdo aumentado para hacer espacio a las imágenes */
+    background: #fbeb75;  /* Amarillo en lugar de rosado */
     border-radius: 12px;
-    color: #e91e63;
+    color: rgb(255, 255, 255);  /* Amarillo oscuro para el texto */
     font-weight: 500;
+   /* Para posicionar las imágenes absolutamente dentro */
 }
 
 .caracteristica i {
     font-size: 1.2em;
     min-width: 20px;
+}
+
+/* Imagen abevolando1 para "Toma fotos con tu cámara" */
+.abeja-camara {
+    position: absolute;
+    left: 7px;
+    width: 60px;
+    height: 65px;
+    background-image: url('./assets/IMAGES/abejacanasta.png');
+    background-size: 100% 100%;
+    transform: rotate(-21deg);
+    background-repeat: no-repeat;
+    margin-right: 8px;
+}
+
+/* Imagen honey para "Comparte momentos especiales" */
+.honey-compartir {
+    position: absolute;
+    left: 10px;
+    width: 70px;
+    height: 75px;
+    background-image: url('./assets/IMAGES/honey.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+    filter: sepia(30%) saturate(150%) hue-rotate(30deg) brightness(0.9) contrast(1.1); /* Color amarillo suave */
+}
+
+/* ========================================
+   FILTRO AMARILLO PARA TODAS LAS IMÁGENES DE MIEL Y PANAL
+   ======================================== */
+
+/* Aplicar color amarillo suave a TODAS las clases que contengan miel o panal */
+[class*="miel"], 
+[class*="panal"], 
+[class*="honey"],
+.honey-header-decoration {
+    filter: sepia(65%) saturate(90%) hue-rotate(10deg) brightness(0.9) contrast(1.5) !important;
+}
+
+/* EXCEPCIÓN: No aplicar filtro a elementos de carga específicos */
+.seccion-carga [class*="honey"],
+.seccion-carga .honey-header-decoration,
+.carga-honeycomb-container [class*="honey"] {
+    filter: none !important;
+}
+
+/* ========================================
+   MODAL DE CONFIRMACIÓN DE PUBLICACIÓN
+   ======================================== */
+
+/* Campo de comentario personalizado */
+.comentario-usuario {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.label-comentario {
+    display: block;
+    font-weight: 600;
+    color: #e91e63;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.input-comentario {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #f8f4a5;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9em;
+    resize: vertical;
+    min-height: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-comentario:focus {
+    outline: none;
+    border-color: #e9d51e;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.input-comentario::placeholder {
+    color: #727272;
+    font-style: italic;
+}
+
+.contador-caracteres {
+    text-align: right;
+    font-size: 0.8em;
+    color: #727272;
+    margin-top: 5px;
+}
+
+/* ========================================
+   MODAL DE CONFIRMACIÓN - ESTILOS PRINCIPALES
+   ======================================== */
+
+.contenido-modal-confirmacion {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    position: relative;
+}
+
+.encabezado-modal-confirmacion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.encabezado-modal-confirmacion h2 {
+    color: #e91e63;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.encabezado-modal-confirmacion i {
+    font-size: 1.8em;
+    color: #ff9800;
+    animation: pulse 2s infinite;
+}
+
+.cuerpo-modal-confirmacion p {
+    color: #656565;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1.05em;
+}
+
+.preview-imagenes-confirmacion {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.imagen-preview-confirmacion {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e9d11e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mas-imagenes {
+    width: 60px;
+    height: 60px;
+    background: rgba(233, 30, 99, 0.1);
+    border: 2px solid #e9d11e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e9d11e;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.acciones-modal-confirmacion {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+/* Miel para modal confirmación */
+.miel-modal-confirmacion {
+    position: absolute;
+    top: -5px;
+    left: -8px;
+    width: 280px;
+    height: 140px;
+    background-image: url('./assets/IMAGES/mielesquina1.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    transform: scaleX(1);
+    border-radius: 45px 0 0 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 1;
+    filter: sepia(30%) saturate(150%) hue-rotate(30deg) brightness(0.9) contrast(1.1); /* Color amarillo suave */
+}
+
+/* Panal para modal confirmación */
+.panal-modal-confirmacion {
+    position: absolute;
+    bottom: -35px;
+    right: -10px;
+    width: 70px;
+    height: 80px;
+    background-image: url('./assets/IMAGES/panal2.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 1;
+    filter: sepia(30%) saturate(150%) hue-rotate(30deg) brightness(0.9) contrast(1.1); /* Color amarillo suave */
 }
 
 /* Animación de Bienvenida Especial */
@@ -1168,7 +1982,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.71);
+    background: rgba(0, 0, 0, 0.71);                   /* Overlay oscuro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1176,6 +1990,47 @@ body {
     z-index: 10000;
     overflow: hidden;
     box-sizing: border-box;
+}
+
+/* ========================================
+   ABEJAS BIENVENIDA - CONTROL DE POSICIÓN
+   Cambia top, left, right, bottom para mover las abejas
+   ======================================== */
+
+/* ABEJA 1 - Esquina superior izquierda */
+.animacion-bienvenida::before {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abebienbenida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+    pointer-events: none;
+    /* CONTROLES DE POSICIÓN ABEJA 1: */
+    top: 5%;        /* Cambiar para mover ARRIBA/ABAJO */
+    left: 10%;       /* Cambiar para mover IZQUIERDA/DERECHA */
+    transform: rotate(-20deg);  /* Cambiar rotación */
+    animation: float-abeja-1 4s ease-in-out infinite;
+}
+
+/* ABEJA 2 - Esquina inferior derecha */
+.animacion-bienvenida::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abebienbenida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+    pointer-events: none;
+    /* CONTROLES DE POSICIÓN ABEJA 2: */
+    bottom: 30%;     /* Cambiar para mover ARRIBA/ABAJO desde abajo */
+    right: 7%;      /* Cambiar para mover IZQUIERDA/DERECHA desde derecha */
+    transform: rotate(30deg);   /* Cambiar rotación */
+    animation: float-abeja-2 5s ease-in-out infinite 1s;
 }
 
 .contenedor-arco {
@@ -1186,6 +2041,43 @@ body {
     gap: 30px;
     margin-bottom: 50px;
     text-align: center;
+    position: relative;
+}
+
+/* ABEJA 3 - Lado izquierdo del centro */
+.contenedor-arco::before {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abebienbenida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 110px;
+    opacity: 1;
+    pointer-events: none;
+    /* CONTROLES DE POSICIÓN ABEJA 3: */
+    top: 100%;        /* Cambiar para mover ARRIBA/ABAJO */
+    left: 5%;        /* Cambiar para mover IZQUIERDA/DERECHA */
+    transform: rotate(15deg);   /* Cambiar rotación */
+    animation: float-abeja-2 6s ease-in-out infinite 2.5s;
+}
+
+/* ABEJA 4 - NUEVA (la que agregaste) - Parte inferior derecha */
+.contenedor-arco::after {
+    content: '';
+    position: absolute;
+    background-image: url('./assets/IMAGES/abebienbenida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+    pointer-events: none;
+    /* CONTROLES DE POSICIÓN ABEJA 4: */
+    top: 40%;        /* Cambiar para mover ARRIBA/ABAJO */
+    right: 20%;      /* Cambiar para mover IZQUIERDA/DERECHA desde derecha */
+    transform: rotate(-10deg);  /* Cambiar rotación */
+    animation: float-abeja-1 5s ease-in-out infinite 1.5s;
 }
 
 .linea-arco {
@@ -1242,8 +2134,10 @@ body {
 
 .iconos-bebe {
     display: flex;
-    gap: 30px;
+    gap: 80px;  /* Aumentado de 30px a 80px para mayor separación */
     margin-top: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .iconos-bebe i {
@@ -1438,6 +2332,142 @@ body {
     }
 }
 
+/**
+ * ANIMACIONES DE FLOTACIÓN PARA ABEJAS DE FONDO - OPTIMIZADAS
+ * ==========================================================
+ * 
+ * Animaciones suaves y optimizadas para el rendimiento usando transform y will-change
+ */
+@keyframes float-abeja-1 {
+    0%, 100% {
+        transform: translateY(0) rotate(-20deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(-15deg);
+    }
+}
+
+@keyframes float-abeja-2 {
+    0%, 100% {
+        transform: translateY(0) rotate(30deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(35deg);
+    }
+}
+
+@keyframes float-abeja-3 {
+    0%, 100% {
+        transform: translateY(0) rotate(60deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(55deg);
+    }
+    66% {
+        transform: translateY(-5px) rotate(65deg);
+    }
+}
+
+@keyframes float-abeja-4 {
+    0%, 100% {
+        transform: translateY(0) rotate(-45deg);
+    }
+    25% {
+        transform: translateY(-8px) rotate(-40deg);
+    }
+    75% {
+        transform: translateY(-12px) rotate(-50deg);
+    }
+}
+
+/* NUEVAS ANIMACIONES SUAVES Y OPTIMIZADAS */
+@keyframes float-abeja-gentle-1 {
+    0%, 100% {
+        transform: translateY(0px) rotate(45deg) translateX(0px);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-8px) rotate(48deg) translateX(5px);
+        opacity: 1;
+    }
+}
+
+@keyframes float-abeja-gentle-2 {
+    0%, 100% {
+        transform: translateY(0px) rotate(-30deg) translateX(0px);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-6px) rotate(-27deg) translateX(-3px);
+        opacity: 1;
+    }
+}
+
+@keyframes float-abeja-gentle-3 {
+    0%, 100% {
+        transform: translateY(0px) rotate(-10deg) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-10px) rotate(-7deg) scale(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes float-abeja-gentle-4 {
+    0%, 100% {
+        transform: translateY(0px) rotate(20deg) translateX(0px);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-12px) rotate(25deg) translateX(8px);
+        opacity: 0.9;
+    }
+}
+
+@keyframes float-abeja-gentle-5 {
+    0%, 100% {
+        transform: translateY(0px) rotate(60deg) translateX(0px);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-7px) rotate(63deg) translateX(-5px);
+        opacity: 1;
+    }
+}
+
+@keyframes float-abeja-gentle-6 {
+    0%, 100% {
+        transform: translateY(0px) rotate(-45deg) translateX(0px);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-9px) rotate(-42deg) translateX(4px);
+        opacity: 1;
+    }
+}
+
+/* Abejas del contenedor eliminadas según solicitud */
+
+/* Optimización de animaciones para mejor rendimiento */
+body::before,
+body::after,
+#root::before,
+#root::after,
+.honey-header-decoration::before,
+.honey-header-decoration::after,
+.contenedor::before,
+.contenedor::after,
+.animacion-bienvenida::before,
+.animacion-bienvenida::after,
+.contenedor-arco::before {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
     .contenedor {
@@ -1458,6 +2488,28 @@ body {
         font-size: 0.9em;
         padding: 0 10px;
         line-height: 1.3;
+    }
+
+    /* Abejas más visibles en móvil */
+    body::before,
+    body::after {
+        width: 70px;
+        height: 70px;
+        opacity: 0.9;
+    }
+
+    #root::before,
+    #root::after {
+        width: 65px;
+        height: 65px;
+        opacity: 0.8;
+    }
+
+    .tarjeta-bienvenida::before,
+    .tarjeta-bienvenida::after {
+        width: 40px;
+        height: 40px;
+        opacity: 0.7;
     }
 
     /* Arreglar las fotos seleccionadas en móvil - MÁS GRANDES */
@@ -1635,12 +2687,12 @@ body {
 .new-animated-btn {
   position: relative;
   padding: 15px 45px;
-  background: #f8a5c2; /* Color rosado */
+  background: #fff080; /* Color amarillo en lugar de rosado */
   font-size: 17px;
   font-weight: 500;
   color: #181818;
   cursor: pointer;
-  border: 1px solid #f8a5c2;
+  border: 1px solid #fff080; /* Border amarillo también */
   border-radius: 50px;
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
   transition: all 0.3s ease;
@@ -1684,128 +2736,160 @@ body {
   }
 }
 
-/* Hojas SVG animadas - todas en color verde */
-.leaf-path {
-  fill: #4CAF50; /* Verde para las hojas */
-  transition: fill 0.3s ease;
-}
+/* Decoraciones con abeesquina.png y hojaesquina.png - SIN ANIMACIONES */
 
-.new-animated-btn:hover .leaf-path {
-  fill: #45a049; /* Verde más oscuro en hover */
-}
-
-.icon-1 {
+/* Esquina superior izquierda: hoja hacia arriba y abeja encima */
+.new-animated-btn::before {
+  content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  transform-origin: center;
-  transform: rotate(10deg);
-  transition: all 0.5s ease-in-out;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
-  animation: sway-1 3s ease-in-out infinite;
+  top: -14px;
+  left: -19px;
+  width: 40px;
+  height: 40px;
+  background-image: url('./assets/IMAGES/hojaesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(110deg); /* Hoja hacia arriba */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  z-index: 1;
 }
 
-.new-animated-btn:hover .icon-1 {
-  animation: slay-1 2s cubic-bezier(0.52, 0, 0.58, 1) infinite;
-  transform: rotate(10deg) scale(1.1);
-}
-
-@keyframes sway-1 {
-  0%, 100% {
-    transform: rotate(10deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-}
-
-@keyframes slay-1 {
-  0% {
-    transform: rotate(10deg) scale(1.1);
-  }
-  50% {
-    transform: rotate(-10deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(10deg) scale(1.1);
-  }
-}
-
-.icon-2 {
+.new-animated-btn::after {
+  content: '';
   position: absolute;
-  top: 0;
+  top: -7px;
+  left: -10px;
+  width: 30px;
+  height: 30px;
+  background-image: url('./assets/IMAGES/abeesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(0deg); /* Forma original */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Pseudo-elemento adicional para esquina inferior derecha */
+.new-animated-btn {
+  position: relative;
+}
+
+.new-animated-btn .corner-decoration {
+  position: absolute;
+  bottom: -3px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.new-animated-btn .corner-decoration::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/IMAGES/hojaesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(135deg); /* Hoja apuntando hacia abajo-derecha */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.new-animated-btn .corner-decoration::after {
+  content: '';
+  position: absolute;
+  top: 10px;
   left: 25px;
-  width: 12px;
-  transform-origin: center;
-  transform: rotate(10deg);
-  transition: all 1s ease-in-out;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
-  animation: sway-2 2.5s ease-in-out infinite 0.5s;
+  width: 30px;
+  height: 30px;
+  background-image: url('./assets/IMAGES/abeesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(200deg); /* Abeja apuntando hacia la izquierda */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  z-index: 1;
 }
 
-.new-animated-btn:hover .icon-2 {
-  animation: slay-2 3s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
-  transform: rotate(0) scale(1.1);
-}
+/* ========================================
+   DECORACIONES PARA VINE-HANGING-BUTTON - MISMO DISEÑO
+   ======================================== */
 
-@keyframes sway-2 {
-  0%, 100% {
-    transform: rotate(10deg);
-  }
-  50% {
-    transform: rotate(25deg);
-  }
-}
-
-@keyframes slay-2 {
-  0% {
-    transform: rotate(0deg) scale(1.1);
-  }
-  50% {
-    transform: rotate(20deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(0) scale(1.1);
-  }
-}
-
-.icon-3 {
+/* Esquina superior izquierda: hoja hacia arriba y abeja encima */
+.vine-hanging-button-simple::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 18px;
-  transform-origin: center;
-  transform: rotate(-5deg);
-  transition: all 1s ease-in-out;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
-  animation: sway-3 3.5s ease-in-out infinite 1s;
+  top: -14px;
+  left: -19px;
+  width: 40px;
+  height: 40px;
+  background-image: url('./assets/IMAGES/hojaesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(110deg); /* Hoja hacia arriba */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  z-index: 1;
 }
 
-.new-animated-btn:hover .icon-3 {
-  animation: slay-3 2s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
-  transform: rotate(0) scale(1.1);
+.vine-hanging-button-simple::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: -10px;
+  width: 30px;
+  height: 30px;
+  background-image: url('./assets/IMAGES/abeesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(0deg); /* Forma original */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  z-index: 2;
 }
 
-@keyframes sway-3 {
-  0%, 100% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(-15deg);
-  }
+/* Pseudo-elemento adicional para esquina inferior derecha */
+.vine-hanging-button-simple {
+  position: relative;
 }
 
-@keyframes slay-3 {
-  0% {
-    transform: rotate(0deg) scale(1.1);
-  }
-  50% {
-    transform: rotate(-10deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(0) scale(1.1);
-  }
+.vine-hanging-button-simple .corner-decoration {
+  position: absolute;
+  bottom: -3px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vine-hanging-button-simple .corner-decoration::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/IMAGES/hojaesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(135deg); /* Hoja apuntando hacia abajo-derecha */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.vine-hanging-button-simple .corner-decoration::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  width: 30px;
+  height: 30px;
+  background-image: url('./assets/IMAGES/abeesquina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(200deg); /* Abeja apuntando hacia la izquierda */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  z-index: 1;
 }
 
 /* ========================================
@@ -1896,7 +2980,7 @@ body {
 .honeycomb div {
   -webkit-animation: honeycomb 2.1s infinite backwards;
   animation: honeycomb 2.1s infinite backwards;
-  background: #ff8c00;  /* Naranja fuerte como la miel */
+  background: #f8f4a5;  /* Naranja fuerte como la miel */
   height: 16px;  /* Tamaño mediano */
   margin-top: 8px;  /* Proporcionalmente ajustado */
   position: absolute;
@@ -1915,12 +2999,12 @@ body {
 
 .honeycomb div:after {
   top: -8px;  /* Tamaño mediano */
-  border-bottom: 8px solid #ff8c00;  /* Tamaño mediano */
+  border-bottom: 8px solid #f8f4a5;  /* Tamaño mediano */
 }
 
 .honeycomb div:before {
   bottom: -8px;  /* Tamaño mediano */
-  border-top: 8px solid #ff8c00;  /* Tamaño mediano */
+  border-top: 8px solid #f8f4a5;  /* Tamaño mediano */
 }
 
 .honeycomb div:nth-child(1) {
@@ -1993,7 +3077,7 @@ body {
 .mensaje-carga {
   font-size: 1.5em;
   font-weight: 700;
-  color: #ff8c00;  /* Naranja fuerte como la miel */
+  color: #ec4680;  /* Naranja fuerte como la miel */
   text-transform: uppercase;
   letter-spacing: 2px;
   font-family: 'Quicksand', sans-serif;
@@ -2023,10 +3107,10 @@ body {
 /* Miel para tarjeta bienvenida "¡Captura un momento especial!" */
 .miel-tarjeta-bienvenida {
   position: absolute;
-  top: -5px;
+  top: -4px;
   left: -7px;
-  width: 200px;     /* ← TÚ CAMBIAS - Tarjeta bienvenida */
-  height: 100px;    /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  width: 345px;     /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  height: 120px;    /* ← TÚ CAMBIAS - Tarjeta bienvenida */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -2063,7 +3147,7 @@ body {
   position: absolute;
   top: -5px;
   left: -7px;
-  width: 220px;     /* ← TÚ CAMBIAS - Sección fotos */
+  width: 310px;     /* ← TÚ CAMBIAS - Sección fotos */
   height: 110px;    /* ← TÚ CAMBIAS - Sección fotos */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
@@ -2077,19 +3161,19 @@ body {
   opacity: 1;
 }
 
-/* Miel para vista previa de fotos */
+/* Miel para vista previa de fotos - MOVIDA A ESQUINA DERECHA Y GIRADA */
 .miel-vista-previa {
   position: absolute;
-  top: -5px;
-  left: -7px;
-  width: 210px;     /* ← TÚ CAMBIAS - Vista previa */
-  height: 105px;    /* ← TÚ CAMBIAS - Vista previa */
+  top: -4px;
+  right: -6px;
+  width: 350px;     /* ← TÚ CAMBIAS - Vista previa */
+  height: 115px;    /* ← TÚ CAMBIAS - Vista previa */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-position: left top;
-  transform: scaleX(1);
-  border-radius: 25px 0 0 0;
+  background-position: right top;
+  transform: scaleX(-1);
+  border-radius: 0 25px 0 0;
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
@@ -2099,10 +3183,10 @@ body {
 /* Miel para modal "¡LISTO!" - proceso de publicación */
 .miel-modal-listo {
   position: absolute;
-  top: -5px;
-  left: -7px;
-  width: 170px;     /* ← TÚ CAMBIAS - Modal LISTO */
-  height: 85px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  top: -4px;
+  left: -5px;
+  width: 270px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  height: 105px;     /* ← TÚ CAMBIAS - Modal LISTO */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -2120,8 +3204,8 @@ body {
   position: absolute;
   top: -5px;
   left: -7px;
-  width: 250px;     /* ← TÚ CAMBIAS - Animación bienvenida */
-  height: 125px;    /* ← TÚ CAMBIAS - Animación bienvenida */
+  width: 400px;     /* ← TÚ CAMBIAS - Animación bienvenida */
+  height: 135px;    /* ← TÚ CAMBIAS - Animación bienvenida */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -2131,7 +3215,7 @@ body {
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* Miel para modal de imagen ampliada */
@@ -2139,8 +3223,8 @@ body {
   position: absolute;
   top: -5px;
   left: -7px;
-  width: 180px;     /* ← TÚ CAMBIAS - Modal imagen */
-  height: 90px;     /* ← TÚ CAMBIAS - Modal imagen */
+  width: 300px;     /* ← TÚ CAMBIAS - Modal imagen */
+  height: 130px;     /* ← TÚ CAMBIAS - Modal imagen */
   background-image: url('./assets/IMAGES/mielesquina1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -2150,7 +3234,7 @@ body {
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* 2. Panal2 ESPECÍFICO para cada recuadro - TÚ controlas cada uno independiente */
@@ -2158,9 +3242,9 @@ body {
 /* Panal para tarjeta bienvenida "¡Captura un momento especial!" */
 .panal-tarjeta-bienvenida {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  width: 80px;      /* ← TÚ CAMBIAS - Tarjeta bienvenida */
+  bottom: -30px;
+  right: -7px;
+  width: 70px;      /* ← TÚ CAMBIAS - Tarjeta bienvenida */
   height: 80px;     /* ← TÚ CAMBIAS - Tarjeta bienvenida */
   background-image: url('./assets/IMAGES/panal2.png');
   background-size: 100% 100%;
@@ -2203,17 +3287,18 @@ body {
   opacity: 1;
 }
 
-/* Panal para vista previa de fotos */
+/* Panal para vista previa de fotos - MOVIDO A ESQUINA IZQUIERDA Y GIRADO */
 .panal-vista-previa {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  width: 85px;      /* ← TÚ CAMBIAS - Vista previa */
-  height: 85px;     /* ← TÚ CAMBIAS - Vista previa */
+  bottom: -35px;
+  left: -10px;
+  width: 80px;      /* ← TÚ CAMBIAS - Vista previa */
+  height: 100px;     /* ← TÚ CAMBIAS - Vista previa */
   background-image: url('./assets/IMAGES/panal2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
+  transform: scaleX(-1);
   pointer-events: none;
   z-index: -1;
   opacity: 1;
@@ -2222,10 +3307,10 @@ body {
 /* Panal para modal "¡LISTO!" - proceso de publicación */
 .panal-modal-listo {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  width: 75px;      /* ← TÚ CAMBIAS - Modal LISTO */
-  height: 75px;     /* ← TÚ CAMBIAS - Modal LISTO */
+  bottom: -35px;
+  right: -7px;
+  width: 80px;      /* ← TÚ CAMBIAS - Modal LISTO */
+  height: 95px;     /* ← TÚ CAMBIAS - Modal LISTO */
   background-image: url('./assets/IMAGES/panal2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -2275,17 +3360,54 @@ body {
   display: inline-block;
   width: 150px;
   height: 150px;
-  background-image: url('./assets/IMAGES/abejacanasta.png');
+  background-image: url('./assets/IMAGES/abevolando1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 0 auto;
 }
+/* Clase para abejacanasta en carga animada */
+.abejacanasta-carga-animada {
+  display: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url('./assets/IMAGES/abejacanasta.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: volar-arriba-abajo 2.5s ease-in-out infinite, pulse-carga 2s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Clase para abejacanasta en estado final de carga */
+.abejacanasta-carga {
+  display: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url('./assets/IMAGES/abejacanasta.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: volar-arriba-abajo 2.5s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Animación de pulso para la carga */
+@keyframes pulse-carga {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
 
 /* Clase para abejavolando1 en el encabezado */
 .abejavolando-encabezado {
-  width: 100px;
+  width: 70px;
   height: 80px;
-  background-image: url('./assets/IMAGES/abevolando1.png');
+  background-image: url('./assets/IMAGES/abemiel.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;

@@ -438,7 +438,15 @@ function App() {
         <footer className="pie-pagina">
           {/* Enlace al perfil de Instagram */}
           <div className="enlace-instagram">
-            <a href="https://instagram.com/baby_shower_daella" target="_blank" className="boton-instagram-pie">
+            <a href="instagram://user?username=baby_shower_daella" target="_blank" className="boton-instagram-pie" onClick={(e) => {
+              // Intenta abrir la app primero
+              window.location.href = 'instagram://user?username=baby_shower_daella';
+              // Si no funciona en 500ms, abre en navegador
+              setTimeout(() => {
+                window.open('https://www.instagram.com/baby_shower_daella/', '_blank');
+              }, 500);
+              e.preventDefault();
+            }}>
               
               ¡Visita nuestro perfil!
             </a>
